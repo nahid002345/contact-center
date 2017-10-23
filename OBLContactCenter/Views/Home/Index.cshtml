@@ -1,0 +1,154 @@
+﻿@model OBLContactCenter.Models.Dashboard
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function getTaskList(id) {
+        var url = '@Url.Action("SearchList", "Home")';
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: url,
+            data: { "searchCat": id },
+            success: function (data) {
+                $('.modal-body').html(data);
+                $('#ModDetailInfo').modal('show');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to load Information');
+            }
+        });
+
+    }
+    function getGroupTaskList(id) {
+        var url = '@Url.Action("SearchList", "Home")';
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: url,
+            data: { "searchCat": '4',"grpId" : id},
+            success: function (data) {
+                $('.modal-body').html(data);
+                $('#ModDetailInfo').modal('show');
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Failed to load Information');
+            }
+        });
+
+    }
+    $(document).ready(function () {
+
+    });
+
+    
+</script>
+@if (Model.ROLE.ToLower().Contains("admin") || Model.ROLE.ToLower().Contains("checker"))
+{
+    <div id="dashDiv" style="margin: 0%;">
+        <div class="row" style="margin: 0%;">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat red-intense">
+                    <div class="visual">
+                        <i class="fa  fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="details">
+                        <div class="number">
+                            @Model.UrgentMemo
+                        </div>
+                        <div class="desc">
+                            High Priority Request
+                        </div>
+                    </div>
+                    <a class="more" href="javascript:getTaskList(1);">
+                        View more <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat blue-madison">
+                    <div class="visual">
+                        <i class="fa fa-history"></i>
+                    </div>
+                    <div class="details">
+                        <div class="number">
+                            @Model.HourCrossedMemo
+                        </div>
+                        <div class="desc">
+                            6 Hour Crossed Request
+                        </div>
+                    </div>
+                    <a class="more" href="javascript:getTaskList(2);">
+                        View more <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat green-haze">
+                    <div class="visual">
+                        <i class="fa  fa-mail-reply-all"></i>
+                    </div>
+                    <div class="details">
+                        <div class="number">
+                            @Model.ReferMemo
+                        </div>
+                        <div class="desc">
+                            Total Refer Request
+                        </div>
+                    </div>
+                    <a class="more" href="javascript:getTaskList(3);">
+                        View more <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="dashboard-stat yellow-casablanca">
+                    <div class="visual">
+                        <i class="fa fa-paper-plane"></i>
+                    </div>
+                    <div class="details">
+                        <div class="number">
+                            @Model.OtherGroupMemo
+                        </div>
+                        <div class="desc">
+                            Group Pending Request
+                        </div>
+                    </div>
+                    <a class="more" href="javascript:getTaskList(4);">
+                        View more <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin: 0%;">
+            <div class="tiles">
+                @{foreach (OBLContactCenter.Models.DashGroupTicket grpDetails in Model.OtherGrpList)
+                {
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+                        <div class="dashboard-stat purple-plum">
+                            <div class="visual">
+                                <i class="fa fa-tasks"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                    @grpDetails.TotalTicketNo
+                                </div>
+                                <div class="desc">
+                                    @grpDetails.GroupName
+                                </div>
+                            </div>
+                            <a class="more" href="javascript:getGroupTaskList(@grpDetails.GroupId);">
+                                View more <i class="m-icon-swapright m-icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+}
+@Html.Partial("_chartPartial")
+

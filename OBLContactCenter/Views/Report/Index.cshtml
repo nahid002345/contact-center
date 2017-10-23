@@ -1,0 +1,19 @@
+﻿@model OBLContactCenter.Models.ReportViewModel
+@{
+    ViewBag.Title = "Report Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>@Model.ReportName
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <div id="rptDiv" style="height: 500px">
+                <object id="rptView" data="~/Report/wfReportViewer.aspx?PATH=@Model.ReportPath" width="100%" height="100%"></object>
+            </div>
+        </div>
+    </div>
+</div>

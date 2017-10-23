@@ -1,0 +1,80 @@
+﻿@model OBLContactCenter.EFnClass.CCROLE
+<script type="text/javascript">
+
+    $("#chkIsActive").bootstrapSwitch();
+    $("#chkIsAdmin").bootstrapSwitch();
+
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+
+</script>
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Role Information
+            </div>
+        </div>
+        <div class="portlet-body">
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("InsertEditRole", "RoleSetting", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-body">
+                    <div id="hdnDiv" style="display: none;">
+                        @Html.HiddenFor(m => m.ID);
+                        @*@Html.HiddenFor(m => m.ISACTIVE);*@
+                        @Html.HiddenFor(m => m.CREATEDBY);
+                        @Html.HiddenFor(m => m.CREATEDON);
+                        @Html.HiddenFor(m => m.MODIFIEDBY);
+                        @Html.HiddenFor(m => m.MODIFIEDON);
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Role Name</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.ROLENAME, new { @class = "form-control", placeholder = "Enter Role Name" })
+                            @*<input type="text" class="form-control" placeholder="Enter Employee ID/ User ID">*@
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.ROLENAME, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Is Admin ?</label>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(m => m.ISADMIN, new { @name = "chkIsAdmin", id = "chkIsAdmin" })
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Is Active ?</label>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(m => m.ISACTIVE, new { @name = "chkIsActive", id = "chkIsActive" })
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            @if (Model.ID == 0)
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="create" id="createBtn">Create</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="update" id="updateBtn">Update</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿@model List<OBLContactCenter.EFnClass.CCCALLTYPE>
+
+
+<div id="TypegridList">
+    @if (Model != null)
+    {
+        var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "TypegridList");
+
+
+
+        @grid.Table(
+             tableStyle: "table table-bordered table-striped table-condensed flip-content",
+             headerStyle: "flip-content",
+             columns: new[]{
+               grid.Column("ID",header: "ID"),
+               grid.Column("CCCALLCATAGORY.NAME",header: "Call Catagory"),
+               grid.Column("TYPENAME",header: "Call Type"),
+               grid.Column("REMARKS",header: "Remarks"),
+               grid.Column("ISACTIVE", "Status",format: (item) => (item.ISACTIVE) ? Html.Raw("<span class='fa fa-check-square-o'></span>") :
+                                                                                        Html.Raw("<span class='fa fa-times'></span>")),
+                grid.Column("", "Action", format: @<button class="btn red editType" data-id="@item.ID" data-url="@Url.Action("EditType", "CallCatTypeSetting")">Edit <i class="fa fa-edit"></i></button>)
+
+                }
+                      );
+        <div class="row">
+            <div class="col-sm-6">
+                @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination")
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="note note-warning">
+            <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+        </div>
+    }
+</div>
+
+
+
+
+

@@ -1,0 +1,55 @@
+﻿@model OBLContactCenter.Models.SOURCEPRODUCTList
+@{
+    ViewBag.Title = "Source & Product Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-12 ">
+
+
+    @if (TempData["SuccessMsg"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong><span class="fa fa-check"></span></strong> @TempData["SuccessMsg"].ToString()
+        </div>
+    }
+
+    @if (TempData["ErrorMsg"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong><span class="fa  fa-times"></span></strong> @TempData["ErrorMsg"].ToString()
+        </div>
+    }
+
+
+
+    <div id="CatgridList">
+        @Html.Partial("_SourceListPartial", Model.SourceList)
+    </div>
+    <div id="TypegridList">
+        @Html.Partial("_ProductListPartial", Model.ProductList)
+    </div>
+    <!-- END FORM-->
+</div>
+<div class="modal fade bs-modal-lg" id="DetailInfo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

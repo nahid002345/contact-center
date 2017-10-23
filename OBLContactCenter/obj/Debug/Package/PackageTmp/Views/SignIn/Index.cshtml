@@ -1,0 +1,145 @@
+﻿@model OBLContactCenter.Models.LogIn
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>OBL CCenter | Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/Content/CustomeTheme/global/FontRef.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/global/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/global/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/global/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/global/uniform.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/global/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="~/Content/CustomeTheme/pages/login.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Content/CustomeTheme/pages/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/pages/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/pages/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CustomeTheme/pages/darkblue.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="~/Content/CustomeTheme/pages/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="@Url.Action("Index","SignIn")">
+            <img src="~/Content/img/logo/contact-center-logo.png" style="width: 10%;" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("SignIn", "SignIn", FormMethod.Post, new { @class = "login-form" }))
+        {
+
+            <h3 class="form-title">Log In</h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    Enter any User ID/Employee ID and password.
+                </span>
+            </div>
+            <div class="form-group">
+
+                <label class="control-label visible-ie8 visible-ie9">User ID/Employee ID</label>
+                @Html.TextBoxFor(m => m.USERID, new { @class = "form-control form-control-solid placeholder-no-fix", autocomplete = "off", placeholder = "User ID/EmployeeID", name = "EmployeeID" })
+
+                @Html.ValidationMessageFor(m => m.USERID, null, new { @class = "alert alert-danger display" })
+
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                @Html.PasswordFor(m => m.USERPASSWORD, new { @class = "form-control form-control-solid placeholder-no-fix", placeholder = "Password", name = "Password" })
+                @Html.ValidationMessageFor(m => m.USERPASSWORD, null, new { @class = "alert alert-danger display" })
+
+                @*<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />*@
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger uppercase">Login <span class="fa fa-unlock"></span></button>
+            </div>
+            if (TempData["SignMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong>Warning!</strong> @TempData["SignMsg"].ToString()
+                </div>
+            }
+        }
+
+        <!-- END LOGIN FORM -->
+    </div>
+    <div class="copyright">
+        2015 © OBL Contact Center
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/global/plugins/respond.min.js"></script>
+    <script src="../../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/jquery.uniform.min.js" type="text/javascript"></script>
+
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/Scripts/CustomeJS/metronic.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/layout.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/quick-sidebar.js" type="text/javascript"></script>
+    <script src="~/Scripts/CustomeJS/demo.js" type="text/javascript"></script>
+
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

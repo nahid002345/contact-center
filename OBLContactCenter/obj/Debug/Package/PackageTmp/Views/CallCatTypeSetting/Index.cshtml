@@ -1,0 +1,113 @@
+﻿@model OBLContactCenter.Models.CALLCATAGORYTYPE
+@{
+    ViewBag.Title = "Category & Type Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    var startDate;
+    var endDate;
+    $(document).ready(function () {
+        $('#taskSearch').click(function () {
+            var actionurl = '@Url.Action("SearchTypeList", "CallCatTypeSetting")'; // the url to the controller
+            var catagoryId = $('#srchCatagoryId').val();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionurl,
+                data: { "catagoryId": catagoryId },
+                success: function (data) {
+                    $('#TypegridList').html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to load Information');
+                }
+            });
+        });
+    });
+</script>
+
+<div class="col-md-12 ">
+
+
+    @if (TempData["SuccessMsg"] != null)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong><span class="fa fa-check"></span></strong>@TempData["SuccessMsg"].ToString()
+        </div>
+    }
+
+    @if (TempData["ErrorMsg"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong><span class="fa  fa-times"></span></strong>@TempData["ErrorMsg"].ToString()
+        </div>
+    }
+
+
+
+    <div id="CatgridList">
+        @Html.Partial("_CatagoryListPartial", Model.CallCatagoryList)
+    </div>
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Call Type Information
+            </div>
+            <div class="tools">
+                <button class="btn green" id="createType" data-url="@Url.Action("CreateType", "CallCatTypeSetting")">Create <i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="portlet-body flip-scroll">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>
+                            <label class="control-label">Catagory</label>
+                        </td>
+                        <td>
+                            <label class="control-label">Action</label>
+                        </td>
+                    </tr>
+                </thead>
+                <tr>
+
+                    <td>
+                        @Html.DropDownList("srchCatagoryId", (IEnumerable<SelectListItem>)ViewBag.CallCatagoryList, "All", new { @class = "form-control", id = "srchCatagoryId" })
+
+                    </td>
+                    <td>
+                        <button class="btn green" id="taskSearch">Search <i class="fa fa-search"></i></button>
+                    </td>
+
+                </tr>
+            </table>
+
+            @Html.Partial("_TypeListPartial", Model.CallTypeList)
+
+        </div>
+    </div>
+    <div id="userInfo">
+    </div>
+    <!-- END FORM-->
+</div>
+<div class="modal fade bs-modal-lg" id="DetailInfo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

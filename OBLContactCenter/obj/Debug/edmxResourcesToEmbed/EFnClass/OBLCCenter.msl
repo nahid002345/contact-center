@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OBLCONTACTCENTERModelStoreContainer" CdmEntityContainer="OBLCONTACTCENTEREntities">
+    <EntitySetMapping Name="CCACTIONMAPs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCACTIONMAP">
+        <MappingFragment StoreEntitySet="CCACTIONMAP">
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="MEMOTYPEID" ColumnName="MEMOTYPEID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="ACTIONID" ColumnName="ACTIONID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCCALLCATAGORies">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCCALLCATAGORY">
+        <MappingFragment StoreEntitySet="CCCALLCATAGORY">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCCALLTYPEs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCCALLTYPE">
+        <MappingFragment StoreEntitySet="CCCALLTYPE">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="TYPENAME" ColumnName="TYPENAME" />
+          <ScalarProperty Name="CATAGORYID" ColumnName="CATAGORYID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCENUMERATIONs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCENUMERATION">
+        <MappingFragment StoreEntitySet="CCENUMERATION">
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="NAMEVALUE" ColumnName="NAMEVALUE" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCEVENTLOGs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCEVENTLOG">
+        <MappingFragment StoreEntitySet="CCEVENTLOG">
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCGROUPs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCGROUP">
+        <MappingFragment StoreEntitySet="CCGROUP">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="GROUPNAME" ColumnName="GROUPNAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCMEMOATTACHMENTs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCMEMOATTACHMENT">
+        <MappingFragment StoreEntitySet="CCMEMOATTACHMENT">
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="FILEPATH" ColumnName="FILEPATH" />
+          <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="MEMOMASTERID" ColumnName="MEMOMASTERID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCMEMOLOGs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCMEMOLOG">
+        <MappingFragment StoreEntitySet="CCMEMOLOG">
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="ACTEDBY" ColumnName="ACTEDBY" />
+          <ScalarProperty Name="ACTIONTYPE" ColumnName="ACTIONTYPE" />
+          <ScalarProperty Name="ACTIONDETAILS" ColumnName="ACTIONDETAILS" />
+          <ScalarProperty Name="ASSIGNGROUP" ColumnName="ASSIGNGROUP" />
+          <ScalarProperty Name="MEMOMASTERID" ColumnName="MEMOMASTERID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCMEMOMASTERs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCMEMOMASTER">
+        <MappingFragment StoreEntitySet="CCMEMOMASTER">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="ISOPEN" ColumnName="ISOPEN" />
+          <ScalarProperty Name="LASTACTIONDETAILS" ColumnName="LASTACTIONDETAILS" />
+          <ScalarProperty Name="LASTACTIONTYPE" ColumnName="LASTACTIONTYPE" />
+          <ScalarProperty Name="ASSIGNGROUP" ColumnName="ASSIGNGROUP" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="PRODUCTTYPE" ColumnName="PRODUCTTYPE" />
+          <ScalarProperty Name="SOURCETYPE" ColumnName="SOURCETYPE" />
+          <ScalarProperty Name="CALLTYPE" ColumnName="CALLTYPE" />
+          <ScalarProperty Name="CALLCATEGORY" ColumnName="CALLCATEGORY" />
+          <ScalarProperty Name="REQUESTDETAILS" ColumnName="REQUESTDETAILS" />
+          <ScalarProperty Name="CUSTCARDNO" ColumnName="CUSTCARDNO" />
+          <ScalarProperty Name="CUSTACNO" ColumnName="CUSTACNO" />
+          <ScalarProperty Name="CUSTENTITYTYPE" ColumnName="CUSTENTITYTYPE" />
+          <ScalarProperty Name="CUSTOMERCONTACT" ColumnName="CUSTOMERCONTACT" />
+          <ScalarProperty Name="CUSTOMERNAME" ColumnName="CUSTOMERNAME" />
+          <ScalarProperty Name="TICKETNO" ColumnName="TICKETNO" />
+          <ScalarProperty Name="MEMOTYPE" ColumnName="MEMOTYPE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCMENUs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCMENU">
+        <MappingFragment StoreEntitySet="CCMENU">
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="ICONTEXT" ColumnName="ICONTEXT" />
+          <ScalarProperty Name="ORDERNO" ColumnName="ORDERNO" />
+          <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+          <ScalarProperty Name="ISPARENT" ColumnName="ISPARENT" />
+          <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCROLEs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCROLE">
+        <MappingFragment StoreEntitySet="CCROLE">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="ISADMIN" ColumnName="ISADMIN" />
+          <ScalarProperty Name="ROLENAME" ColumnName="ROLENAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCROLEMENUs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCROLEMENU">
+        <MappingFragment StoreEntitySet="CCROLEMENU">
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="MENUID" ColumnName="MENUID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCUSERs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCUSER">
+        <MappingFragment StoreEntitySet="CCUSER">
+          <ScalarProperty Name="MODIFIEDON" ColumnName="MODIFIEDON" />
+          <ScalarProperty Name="MODIFIEDBY" ColumnName="MODIFIEDBY" />
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="IMAGEPATH" ColumnName="IMAGEPATH" />
+          <ScalarProperty Name="GROUPID" ColumnName="GROUPID" />
+          <ScalarProperty Name="EMPLOYEEROLEID" ColumnName="EMPLOYEEROLEID" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="EMPLOYEENAME" ColumnName="EMPLOYEENAME" />
+          <ScalarProperty Name="EMPLOYEEID" ColumnName="EMPLOYEEID" />
+          <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TblAudits">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.TblAudit">
+        <MappingFragment StoreEntitySet="TblAudit">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+          <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="PrimaryKeyValue" ColumnName="PrimaryKeyValue" />
+          <ScalarProperty Name="PrimaryKeyField" ColumnName="PrimaryKeyField" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCACTIONGROUPMAPs">
+      <EntityTypeMapping TypeName="OBLCONTACTCENTERModel.CCACTIONGROUPMAP">
+        <MappingFragment StoreEntitySet="CCACTIONGROUPMAP">
+          <ScalarProperty Name="CREATEDON" ColumnName="CREATEDON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="ASGNGROUPID" ColumnName="ASGNGROUPID" />
+          <ScalarProperty Name="MEMOTYPEID" ColumnName="MEMOTYPEID" />
+          <ScalarProperty Name="ROLEID" ColumnName="ROLEID" />
+          <ScalarProperty Name="ACTIONID" ColumnName="ACTIONID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

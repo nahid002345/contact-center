@@ -1,0 +1,197 @@
+﻿@model OBLContactCenter.Models.TaskList
+<div id="gridList">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", ".viewCreateCRM", function () {
+
+                var actionurl = '@Url.Action("ViewRequest", "CRM")'; // the url to the controller
+
+                var id = $(this).attr('data-id'); // the id that's given to each button in the list
+                //alert(url2 + '/' + id);
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: actionurl,
+                    data: { "requestId": id },
+                    success: function (data) {
+                        $('.modal-body').html(data);
+                        $('#ModDetailInfo').modal('show');
+                        $.validator.unobtrusive.parse($('.modal-body'));
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to load Information');
+                    }
+                });
+            });
+            $(document).on("click", ".editTaskCRM", function () {
+                //e.preventDefault();
+                var url = '@Url.Action("EditTaskMemo", "CRMTask")'; // the url to the controller
+                var id = $(this).attr('data-id');
+                $.get(url + '/' + id, function (data) {
+                    $('.modal-body').html(data);
+                    $('#ModDetailInfo').modal('show');
+                    $.validator.unobtrusive.parse($('.modal-body'));
+                });
+            });
+        });
+
+    </script>
+    <div class="portlet-body flip-scroll" id="gridInfo">
+
+
+        @if (Model.CCMEMOLIST != null && Model.CCMEMOLIST.Count > 0)
+        {
+
+
+            <div class="col-xs-12">
+                @if (Model.TASKTYPE.Value == 1)
+                {<div class="dashboard-stat red-intense">
+                    <div class="visual">
+                        <i class="fa  fa-exclamation-triangle"></i>
+                    </div>
+
+                    <div class="details">
+                        <div class="number">
+                            @Model.CCMEMOLIST.Count
+                        </div>
+                        <div class="desc">
+                            @Model.TASKTYPENAME
+                        </div>
+                    </div>
+                </div>
+                }
+                @if (Model.TASKTYPE.Value == 2)
+                {<div class="dashboard-stat blue-madison">
+                    <div class="visual">
+                        <i class="fa fa-history"></i>
+                    </div>
+
+                    <div class="details">
+
+                        <div class="number">
+                            @Model.CCMEMOLIST.Count
+                        </div>
+                        <div class="desc">
+                            @Model.TASKTYPENAME
+                        </div>
+                    </div>
+                </div>
+                }
+                @if (Model.TASKTYPE.Value == 3)
+                {<div class="dashboard-stat green-haze">
+
+                    <div class="visual">
+                        <i class="fa  fa-mail-reply-all"></i>
+                    </div>
+
+                    <div class="details">
+
+                        <div class="number">
+                            @Model.CCMEMOLIST.Count
+                        </div>
+                        <div class="desc">
+                            @Model.TASKTYPENAME
+                        </div>
+                    </div>
+                </div>
+                }
+                @if (Model.TASKTYPE.Value == 4)
+                {<div class="dashboard-stat yellow-casablanca">
+
+                    <div class="visual">
+                        <i class="fa fa-paper-plane"></i>
+                    </div>
+
+                    <div class="details">
+                        <div class="number">
+                            @Model.CCMEMOLIST.Count
+                        </div>
+                        <div class="desc">
+                            @Model.TASKTYPENAME
+                        </div>
+                    </div>
+                </div>
+                }
+
+                @if (Model.TASKTYPE.Value == 5)
+                {<div class="dashboard-stat grey-gallery">
+
+                    <div class="visual">
+                        <i class="fa fa-search"></i>
+                    </div>
+
+                    <div class="details">
+                        <div class="number">
+                            @Model.CCMEMOLIST.Count
+                        </div>
+                        <div class="desc">
+                            @Model.TASKTYPENAME
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+
+
+                var grid = new WebGrid(Model.CCMEMOLIST, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "gridList");
+                //grid.PagerList(WebGridPagerModes.All, paginationStyle: "Pagination");
+
+
+                @grid.Table(
+             tableStyle: "table table-bordered table-striped table-condensed flip-content",
+             headerStyle: "flip-content",
+
+             columns: new[]{
+               grid.Column(header: "",format:@<text> @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("high"))
+               {<span class="label label-danger"><i class="icon-bell"></i> </span>}
+            @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("medium"))
+            {<span class="label label-warning"><i class="icon-bell"></i> </span>}
+            @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("low"))
+            {<span class="label label-info"><i class="icon-bell"></i> </span>} </text>),
+               grid.Column(header: "TICKET",format:@<text><a class="editTaskCRM" data-id="@item.ID">
+                @item.TICKETNO
+            </a>  @if (item.ISOPEN == true)
+            {
+
+                if (DateTime.Now.Subtract(item.CREATEDON).TotalHours <= 12)
+                {
+                    <span class="label label-info">@DateTime.Now.Subtract(item.CREATEDON).Days Days @DateTime.Now.Subtract(item.CREATEDON).Hours Hours</span>
+                }
+                else if (DateTime.Now.Subtract(item.CREATEDON).TotalHours > 12 && DateTime.Now.Subtract(item.CREATEDON).TotalHours <= 24)
+                {
+                    <span class="label label-warning">@DateTime.Now.Subtract(item.CREATEDON).Days Days @DateTime.Now.Subtract(item.CREATEDON).Hours Hours</span>
+                }
+                else if (DateTime.Now.Subtract(item.CREATEDON).TotalHours > 24)
+                {
+                    <span class="label label-danger">@DateTime.Now.Subtract(item.CREATEDON).Days Days @DateTime.Now.Subtract(item.CREATEDON).Hours Hours</span>
+                }
+            }</text>),
+            grid.Column("CREATEDON",header: "Date"),
+               //grid.Column("TICKETNO",header: "Ticket",canSort:true),
+               grid.Column("CUSTOMERNAME",header: "Customer Name"),
+               //grid.Column(header: "AC No/Card No",format:@<text>@item.CUSTACNO / @item.CUSTCARDNO</text>),
+               grid.Column("CUSTACNO",header: "AC No."),
+               grid.Column("CUSTCARDNO",header: "Card No."),
+               grid.Column("CCCALLCATAGORY.NAME",header: "Catagory"),
+               grid.Column("CCCALLTYPE.TYPENAME",header: "Type"),
+               grid.Column("CCGROUP.GROUPNAME",header: "Group"),
+               grid.Column(header: "Generated By",format:@<text>@item.CCUSER.EMPLOYEENAME (@item.CCGROUP.GROUPNAME)</text>),
+               grid.Column("CCENUMERATION.NAME",header: "Action")
+        }
+                                                                         );
+            <div class="row">
+                <div class="col-sm-6">
+                    @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination")
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="note note-warning">
+                <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+            </div>
+        }
+    </div>
+</div>

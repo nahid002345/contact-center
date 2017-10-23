@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "User Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/CustomeTheme/pages/fileinput.min.css" rel="stylesheet" />
+<script src="~/Scripts/CustomeJS/fileinput.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnSearch').click(function () {
+            var actionurl = '@Url.Action("SearchUserList", "UserSetting")'; // the url to the controller
+            var empId = $('#srchEmpId').val();
+            var name = $('#srchName').val();
+            var role = $('#srchRoleId').val();
+            var group = $('#srchGroupId').val();
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionurl,
+                data: { "EmpId": empId, "SrchName": name, "RoleId": role, "GroupId": group },
+                success: function (data) {
+                    $('#gridList').html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to load Information');
+                }
+            });
+        });
+    });
+
+</script>
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-user"></i>User Information
+            </div>
+            <div class="tools">
+                <button class="btn green" id="createBtn" data-url="@Url.Action("CreateUser", "UserSetting")">Create <i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="portlet-body form">
+
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong>@TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong>@TempData["ErrorMsg"].ToString()
+                </div>
+            }
+
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-search"></i>Search Panel
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <label class="control-label">User/Employee ID</label>
+                                </td>
+                                <td>
+                                    <label class="control-label">Name</label>
+                                </td>
+                                <td>
+                                    <label class="control-label">Role</label>
+                                </td>
+                                <td>
+                                    <label class="control-label">Group</label>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                @Html.TextBox("srchEmpId", null, new { @class = "form-control", id = "srchEmpId" })
+                            </td>
+                            <td>
+                                @Html.TextBox("srchName", null, new { @class = "form-control", id = "srchName" })
+                            </td>
+                            <td>
+                                @Html.DropDownList("srchRoleId", (IEnumerable<SelectListItem>)ViewBag.RoleList, "All", new { @class = "form-control", id = "srchRoleId" })
+                            </td>
+                            <td>
+                                @Html.DropDownList("srchGroupId", (IEnumerable<SelectListItem>)ViewBag.GroupList, "All", new { @class = "form-control", id = "srchGroupId" })
+
+                            </td>
+                            <td>
+                                <button class="btn green" id="btnSearch">Search <i class="fa fa-search"></i></button>
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+            
+                @Html.Partial("_UserListPartial")
+
+            <div id="userInfo">
+            </div>
+            <!-- END FORM-->
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-modal-lg" id="DetailInfo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-full">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

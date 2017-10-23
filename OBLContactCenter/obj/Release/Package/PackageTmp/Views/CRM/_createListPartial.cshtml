@@ -1,0 +1,99 @@
+﻿@model List<OBLContactCenter.EFnClass.CCMEMOMASTER>
+<script>
+    $(document).ready(function () {
+        $(document).on("click", ".viewCreateCRM", function () {
+            var actionurl = '@Url.Action("ViewRequest", "CRM")';// the url to the controller
+            //var url2 = $(this).attr('href');
+            var id = $(this).attr('data-id'); // the id that's given to each button in the list
+            //alert(url2 + '/' + id);
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionurl,
+                data: { "requestId": id },
+                success: function (data) {
+                    $('#DetailInfo').html(data);
+                    $('.nav-tabs a[href="#tab_detail"]').tab('show');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to load Information');
+                }
+            });
+        });
+
+
+        $(document).on("click", "#createCRM", function () {
+            var url = '@Url.Action("CreateMemo", "CRM")';// the url to the controller
+            $(".modal-body").empty();
+            $.get(url, function (data) {
+                $('.modal-body').html(data);
+                $('#ModDetailInfo').modal('show');
+                $.validator.unobtrusive.parse($('.modal-body'));
+            });
+        });
+
+        $('#editCRM').click(function () {
+            //e.preventDefault();
+            var url = '@Url.Action("EditMemo", "CRM")';// the url to the controller
+            var id = $(this).attr('data-id');
+            $.get(url + '/' + id, function (data) {
+                $('.modal-body').html(data);
+                $('#ModDetailInfo').modal('show');
+                $.validator.unobtrusive.parse($('.modal-body'));
+            });
+        });
+
+
+    });
+
+</script>
+
+
+<div class="portlet-body flip-scroll">
+    @if (Model != null && Model.Count > 0)
+    {
+        var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "gridList");
+        @grid.Table(
+             tableStyle: "table table-bordered table-striped table-condensed flip-content",
+             headerStyle: "flip-content",
+
+             columns: new[]{
+               grid.Column(header: "",format:@<text> @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("high"))
+               {<span class="label label-danger"><i class="icon-bell"></i> </span>}
+            @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("medium"))
+            {<span class="label label-warning"><i class="icon-bell"></i> </span>}
+            @if (item.CCENUMERATION2.NAME.ToLower().Trim().Contains("low"))
+            {<span class="label label-info"><i class="icon-bell"></i> </span>} </text>),
+               grid.Column(header: "TICKET",format:@<text><a class="viewCreateCRM" data-id="@item.ID">@item.TICKETNO</a>
+
+            </text>),
+            grid.Column("CREATEDON",header: "Date"),
+               //grid.Column("TICKETNO",header: "Ticket",canSort:true),
+               grid.Column("CUSTOMERNAME",header: "Customer Name"),
+               //grid.Column(header: "AC No/Card No",format:@<text>@item.CUSTACNO / @item.CUSTCARDNO</text>),
+               grid.Column("CUSTACNO",header: "AC No."),
+               grid.Column("CUSTCARDNO",header: "Card No."),
+               grid.Column("CCCALLCATAGORY.NAME",header: "Catagory"),
+               grid.Column("CCCALLTYPE.TYPENAME",header: "Type"),
+               grid.Column("CCGROUP.GROUPNAME",header: "Group"),
+               grid.Column("CCENUMERATION.NAME",header: "Action")
+            @*//grid.Column("", "Action", format: @<button class="btn red editCRM" data-id="@item.ID"> Edit <i class="fa fa-edit"></i></button>),
+                grid.Column("", "Action", format: @<button class="btn green viewCreateCRM" data-id="@item.ID">View <i class="fa fa-eye"></i></button>)*@
+
+            }
+                       );
+        <div class="row">
+            <div class="col-sm-6">
+                @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination")
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="note note-warning">
+            <h4 class="block"><span class="fa fa-warning"></span> No result found </h4>
+        </div>
+    }
+</div>

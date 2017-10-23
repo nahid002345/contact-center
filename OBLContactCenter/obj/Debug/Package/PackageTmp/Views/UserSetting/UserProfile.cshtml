@@ -1,0 +1,74 @@
+﻿@model CCUSER
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#chkIsActive").bootstrapSwitch();
+    });
+</script>
+
+<div class="portlet box blue-ebonyclay">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-user"></i>User Information
+        </div>
+    </div>
+    <div class="portlet-body col-md-12">
+        @if (Model != null)
+        {
+            <div style="width: 50%; float: left;">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">User ID</label>
+                    <label class="control-label sale-num">: @Model.USERID</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">User Name</label>
+                    <label class="control-label sale-num">: @Model.EMPLOYEENAME</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Email Address</label>
+                    <label class="control-label sale-num">: @Model.EMAIL</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Group</label>
+                    <label class="control-label sale-num">: @Model.CCGROUP.GROUPNAME</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Role</label>
+                    <label class="control-label sale-num">: @Model.CCROLE.ROLENAME</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Is Active ?</label>
+                    @Html.CheckBoxFor(m => m.ISACTIVE, new { @name = "chkIsActive", id = "chkIsActive", @disabled="disabled" })
+
+                </div>
+            </div>
+            <div class="panel panel-info col-md-3" style="float: right;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Profile Picture</h3>
+                </div>
+                <div class="panel-body">
+                    @if (string.IsNullOrEmpty(Model.IMAGEPATH))
+                    {
+                        <img src="~/Content/img/avatar.png" alt="new" class="img-responsive" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/UserImage/@Model.IMAGEPATH" alt="new" class="img-responsive" />
+                    }
+                </div>
+
+
+            </div>
+        }
+        else
+        {
+            <div class="note note-warning">
+                <h4 class="block"><span class="fa fa-warning"></span> No result found </h4>
+            </div>
+        }
+    </div>
+</div>

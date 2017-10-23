@@ -1,0 +1,27 @@
+//using reference & metadatatype class in EF Generated Class
+
+using OBLContactCenter.Models.MetaModels;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+[MetadataType(typeof())]
+
+//System Dropdown Viewbag Name List
+ViewBag.RoleList
+ViewBag.GroupList
+ViewBag.CatList
+--Main Form 
+ViewBag.MemoTypeList
+ViewBag.PriorityList
+ViewBag.CallCatagoryList
+ViewBag.CallTypeList
+ViewBag.SourceList
+ViewBag.ProductList
+ViewBag.ActionList
+
+01819435509
+
+
+000PSRA152280017
+000PSRA152280088

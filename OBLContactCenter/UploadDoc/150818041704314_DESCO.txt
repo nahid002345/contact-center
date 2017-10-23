@@ -1,0 +1,1015 @@
+991211
+994195
+
+j = { generic: T, html: E, xml: X , image: F, text: k, video: $, audio: I, flash: D, object: P, other: S }
+
+957
+
+0171646255
+
+0071020000497
+811
+jashim
+01712808034
+
+ Momenul Islam Nahid
+One Bank Ltd. Corporate HQ, HRC Bhaban,46, Kawran Bazar Comm. Area, Dhaka
+46, Kawran Bazar Comm. Area, Dhaka
+Dhaka - Dhaka
+
+nahid002345@gmail.com
+
+01912006892
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using ORADCLib;
+using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types; 
+
+using System.Data.OleDb;
+using System.IO;
+using System.Diagnostics;
+using System.Globalization;
+using System.Transactions;
+using System.Data.EntityClient;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
+
+namespace OBLDESCOTOOL
+{
+    public partial class Form1 : Form
+    {
+        DateTime dDate = DateTime.Today;
+        OracleConnection oOracleConnection;
+        OracleCommand oOraCmd;
+        OBLDESCOBILLEntities1 oOBLDESCOBILLEntities = null;
+        BillInfo oBillInfo = null;
+
+        string destinationPath = @"C:\DESCO_log\";
+
+        List<Tran> oTranList = null;
+
+        public void OpenDBConnectionAccess()
+        {
+            oOracleConnection = new OracleConnection();
+            //string strCon = "User ID=hr; password=hr1234;Persist Security Info=True;"+
+            //                "Data Source=(DESCRIPTION=" +
+            //                "(ADDRESS=(PROTOCOL=TCP)(HOST= 10.20.32.201)(PORT=1521))" +
+            //                "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME =ORCL)(SID=ORCL)));";
+            string strCon = "User ID=ONEBANK; password=one121ebbank;Persist Security Info=True;" +
+                "Data Source=(DESCRIPTION=" +
+                "(ADDRESS=(PROTOCOL=TCP)(HOST= 192.168.1.98)(PORT=1521))" +
+                "(CONNECT_DATA=(SERVER = DEDICATED)(SERVICE_NAME =HMIS)(SID=HMIS)));";
+            
+            oOracleConnection.ConnectionString = strCon;
+            oOracleConnection.Open();
+        }
+
+
+        void CloseOracleConnection()
+        {
+            if (oOracleConnection != null && oOracleConnection.State == ConnectionState.Open)
+            oOracleConnection.Close();
+        }
+
+        public List<Tran> SQLServerGetTransInfo()
+        {
+            List<Tran> oTranList = new List<Tran>();
+            try
+            {
+                oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+                List<OIEnumeration> oOIEnumerationList = new List<OIEnumeration>();
+                int enumType = Convert.ToInt16(Enumaretion.EnumType.TranStatus);
+                oOIEnumerationList = oOBLDESCOBILLEntities.OIEnumerations.Where(t => t.Type == enumType).ToList();
+
+                int transid = oOIEnumerationList.FirstOrDefault(t => t.Value == Convert.ToInt16(Enumaretion.TranStatus.Processing).ToString().Trim()).Id;
+                
+
+                oTranList = oOBLDESCOBILLEntities.Trans.Where(t => t.OBLBillStatus == transid).ToList();
+                
+            }
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : OBL to DESCO data upload UNSUCCESSFUL : ==> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());            
+            }
+            return oTranList;
+        }
+
+        public List<Tran> SQLServerGetTransInfo(DateTime date)
+        {
+            oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+            List<OIEnumeration> oOIEnumerationList = new List<OIEnumeration>();
+            int enumType = Convert.ToInt16(Enumaretion.EnumType.TranStatus);
+            oOIEnumerationList = oOBLDESCOBILLEntities.OIEnumerations.Where(t => t.Type == enumType).ToList();
+
+            int transid= oOIEnumerationList.FirstOrDefault(t => t.Value == Convert.ToInt16(Enumaretion.TranStatus.Processing).ToString().Trim()).Id;
+            List<Tran> oTranList = new List<Tran>();
+
+            oTranList = oOBLDESCOBILLEntities.Trans.Where(t => t.CustRequestDate.Equals(date.Date) && t.OBLBillStatus == transid).ToList();
+            return oTranList;
+        }
+
+        public void OracleSetTransInfo(List<Tran> oTransList)
+        {
+
+            String InsertQuery = String.Empty;
+            InsertQuery = "INSERT INTO BILL_COLLECTION (BILL_NO, BUNDLE_NO,BANK_CODE,SCROLL_NO,COLLECTION_DATE,TOTAL_PAYABLE_AMOUNT,TOTAL_PAID_AMOUNT,LPC,PAID,DUE_DATE,COLLECTED_VAT,DEPARTMENT_ID,C_TARIFF) VALUES(:BILL_NO, :BUNDLE_NO,:BANK_CODE,:SCROLL_NO,:COLLECTION_DATE,:TOTAL_PAYABLE_AMOUNT,:TOTAL_PAID_AMOUNT,:LPC,:PAID,:DUE_DATE,:COLLECTED_VAT,:DEPARTMENT_ID,:C_TARIFF) ";
+            
+            try
+            {
+                if (oTransList != null && oTransList.Count > 0)
+                {
+                    OBLDESCOBILLEntities1  oTempOBLDESCOBILLEntities=new OBLDESCOBILLEntities1();
+                    List<OIEnumeration> oOIEnumerationList= new List<OIEnumeration>();
+                    int enumType = Convert.ToInt16(Enumaretion.EnumType.TranStatus);
+                    oOIEnumerationList = oTempOBLDESCOBILLEntities.OIEnumerations.Where(t => t.Type == enumType).ToList();
+
+                    oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+                    OpenDBConnectionAccess();
+
+                    oOraCmd = new OracleCommand();
+                    oOraCmd.Connection = oOracleConnection;
+                    oOraCmd.CommandTimeout = 960000;
+
+                    oOraCmd.CommandText = InsertQuery;
+
+                    foreach (Tran oTranTemp in oTransList)
+                    {
+                        Tran oTrTemp = oOBLDESCOBILLEntities.Trans.FirstOrDefault(t => t.DESCOBillNo == oTranTemp.DESCOBillNo);
+                        
+
+                        oOraCmd.Parameters.Clear();
+
+                        oOraCmd.Parameters.Add(new OracleParameter("BILL_NO",
+                                           OracleDbType.Varchar2,
+                                           oTranTemp.DESCOBillNo,
+                                           ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("BUNDLE_NO",
+                                            OracleDbType.Varchar2,
+                                            oTranTemp.BundleNo,
+                                            ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("BANK_CODE",
+                                           OracleDbType.Varchar2,
+                                           "OB",
+                                           ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("SCROLL_NO",
+                                           OracleDbType.Varchar2,
+                                           oTranTemp.ScrollNo,
+                                           ParameterDirection.Input));                        
+
+                        oOraCmd.Parameters.Add(new OracleParameter("COLLECTION_DATE",
+                                           OracleDbType.Date,
+                                           oTranTemp.CustRequestDate,
+                                           ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("TOTAL_PAYABLE_AMOUNT",
+                                           OracleDbType.Decimal,
+                                           oTranTemp.DESCOTotalBill,
+                                           ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("TOTAL_PAID_AMOUNT",
+                                           OracleDbType.Decimal,
+                                           oTranTemp.CustTotalAmtPay,
+                                           ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("LPC",
+                                           OracleDbType.Decimal,
+                                           oTranTemp.DESCOLPC,
+                                           ParameterDirection.Input));
+
+                        oOraCmd.Parameters.Add(new OracleParameter("PAID",
+                                           OracleDbType.Varchar2,
+                                           "1",
+                                           ParameterDirection.Input));
+
+                        oOraCmd.Parameters.Add(new OracleParameter("DUE_DATE",
+                                           OracleDbType.Date,
+                                           oTranTemp.DESCOBillDueDate,
+                                           ParameterDirection.Input));
+
+                        oOraCmd.Parameters.Add(new OracleParameter("COLLECTED_VAT",
+                                           OracleDbType.Decimal,
+                                           oTranTemp.DESCOVat,
+                                           ParameterDirection.Input));
+                        //oOraCmd.Parameters.Add(new OracleParameter("REMOTE_POSTED",
+                        //                   OracleDbType.Varchar2,
+                        //                   "0",
+                        //                   ParameterDirection.Input));
+                        oOraCmd.Parameters.Add(new OracleParameter("DEPARTMENT_ID",
+                                           OracleDbType.Varchar2,
+                                           oTranTemp.DESCOLocation_Code,
+                                           ParameterDirection.Input));
+
+                        oOraCmd.Parameters.Add(new OracleParameter("C_TARIFF",
+                                           OracleDbType.Varchar2,
+                                           oTranTemp.DESCOBill_Tariff,
+                                           ParameterDirection.Input));
+                        oOraCmd.ExecuteNonQuery();
+
+                        WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : OBL to DESCO data upload SUCCESSFUL : ====> BILL NO: " + oTranTemp.DESCOBillNo.ToString());
+
+                        int transid = oOIEnumerationList.FirstOrDefault(t => t.Value == Convert.ToInt16(Enumaretion.TranStatus.BalanceTransfered).ToString().Trim()).Id;
+                        oTrTemp.OBLBillStatus = transid;
+                        oTrTemp.DESCOBill_Status = "P";
+                        oOBLDESCOBILLEntities.SaveChanges();
+                        WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : OBL TRAN TABLE data UPDATE SUCCESSFUL : ====> BILL NO: " + oTranTemp.DESCOBillNo.ToString());
+                    }
+                    CloseOracleConnection();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                CloseOracleConnection();
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : OBL to DESCO data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+            
+            }
+
+        }
+
+        public DataTable OracleGetBillInfoData()
+        {
+            DataTable dt = new DataTable("DESCOBill");
+            try
+            {
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID"+
+                //    " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL)"+
+                //    "AND (YEAR=" + dDate.ToString("yyyy") + " OR YEAR=" + dDate.ToString("yy") + ") "+
+                //    " AND MONTH IN("+(dDate.Month -1)+","+dDate.Month+")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID,TARIFF" +
+                //                " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+                String strCmd = "select  BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,PAID,LPC,BATCH_OB as BATCH_OBL,TARIFF, TO_CHAR(ORGANIZATION_CODE) as ORGANIZATION_CODE" +
+                               " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);         
+
+                CloseOracleConnection();
+            }
+
+            catch (Exception ex)
+            {
+                CloseOracleConnection();
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+            
+            }
+            return dt;
+        }
+
+        DataTable OracleGetBillInfoData(string billMonth, string billYear)
+        {
+            DataTable dt = new DataTable("DESCOBill");
+            try
+            {
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID"+
+                //    " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL)"+
+                //    "AND (YEAR=" + dDate.ToString("yyyy") + " OR YEAR=" + dDate.ToString("yy") + ") "+
+                //    " AND MONTH IN("+(dDate.Month -1)+","+dDate.Month+")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID,TARIFF" +
+                //                " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+                String strCmd = "select  BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,PAID,LPC,BATCH_OB as BATCH_OBL,TARIFF, TO_CHAR(ORGANIZATION_CODE) as ORGANIZATION_CODE " +
+                               " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR=" + billYear + " AND MONTH = " + billMonth + " AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);
+
+                CloseOracleConnection();
+            }
+
+            catch (Exception ex)
+            {
+                CloseOracleConnection();
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+
+            }
+            return dt;
+        }
+
+        DataTable OracleGetBillInfoData(string billNo)
+        {
+            DataTable dt = new DataTable("DESCOBill");
+            try
+            {
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID"+
+                //    " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL)"+
+                //    "AND (YEAR=" + dDate.ToString("yyyy") + " OR YEAR=" + dDate.ToString("yy") + ") "+
+                //    " AND MONTH IN("+(dDate.Month -1)+","+dDate.Month+")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT_TOTAL AS VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,PAID,TARIFF" +
+                //                " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+                String strCmd = "select  BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,PAID,LPC,BATCH_OB as BATCH_OBL,TARIFF, TO_CHAR(ORGANIZATION_CODE) as ORGANIZATION_CODE " +
+                               " from DESCO.BILL_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND BILL_NO='" + billNo + "' AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);
+
+                CloseOracleConnection();
+            }
+
+            catch (Exception ex)
+            {
+                CloseOracleConnection();
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+
+            }
+            return dt;
+        }
+
+        public DataTable OracleGetFeesInfoData()
+        {
+            DataTable dt = new DataTable("DESCO");
+            try
+            {
+                
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB"+
+                //    " from DESCO.FEES_CALCULATION WHERE MONTH=2 AND YEAR=2013 AND (BATCH_OB IS NULL OR BATCH_OB=0)";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND" +
+                //                "(YEAR="+dDate.ToString("yyyy")+" OR YEAR="+dDate.ToString("yy")+")"+
+                //                " AND MONTH IN(" + (dDate.Month - 1) + "," + dDate.Month + ")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,TARIFF" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL ";
+
+                String strCmd = "select BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT as VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,'0' as PAID,LPC,BATCH_OB as BATCH_OBL,TARIFF, '' as ORGANIZATION_CODE" +
+                                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL ";
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);
+        
+
+                CloseOracleConnection();
+            }
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                      
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+            
+                CloseOracleConnection();
+            }
+            return dt;
+        }
+
+
+        public DataTable OracleGetFeesInfoData(string billMonth, string billYear)
+        {
+            DataTable dt = new DataTable("DESCO");
+            try
+            {
+
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB"+
+                //    " from DESCO.FEES_CALCULATION WHERE MONTH=2 AND YEAR=2013 AND (BATCH_OB IS NULL OR BATCH_OB=0)";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND" +
+                //                "(YEAR="+dDate.ToString("yyyy")+" OR YEAR="+dDate.ToString("yy")+")"+
+                //                " AND MONTH IN(" + (dDate.Month - 1) + "," + dDate.Month + ")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,TARIFF" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL ";
+                String strCmd = "select BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT as VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,'0' as PAID,LPC,BATCH_OB as BATCH_OBL,TARIFF, '' as ORGANIZATION_CODE" +
+                                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR=" + billYear + " AND MONTH = " + billMonth + " AND YEAR IS NOT NULL AND MONTH IS NOT NULL ";
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);
+
+
+                CloseOracleConnection();
+            }
+
+
+
+
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+
+                CloseOracleConnection();
+            }
+            return dt;
+        }
+
+        public DataTable OracleGetFeesInfoData(string billNo)
+        {
+            DataTable dt = new DataTable("DESCO");
+            try
+            {
+
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB"+
+                //    " from DESCO.FEES_CALCULATION WHERE MONTH=2 AND YEAR=2013 AND (BATCH_OB IS NULL OR BATCH_OB=0)";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND" +
+                //                "(YEAR="+dDate.ToString("yyyy")+" OR YEAR="+dDate.ToString("yy")+")"+
+                //                " AND MONTH IN(" + (dDate.Month - 1) + "," + dDate.Month + ")";
+
+                //String strCmd = "select BILL_NO,ACCOUNT_NO,YEAR,MONTH,TOTAL_AMOUNT,VAT,LPC,ISSUE_DATE,DUE_DATE,DEPT_ID,BATCH_OB,TARIFF" +
+                //                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL ";
+                String strCmd = "select BILL_NO,ACCOUNT_NO,MONTH,YEAR,TOTAL_AMOUNT,VAT as VAT_TOTAL,ISSUE_DATE,DEPT_ID,DUE_DATE,'0' as PAID,LPC,BATCH_OB as BATCH_OBL ,TARIFF, '' as ORGANIZATION_CODE" +
+                                " from DESCO.FEES_CALCULATION WHERE (BATCH_OB IS NULL OR BATCH_OB=0)AND BILL_NO='" + billNo + "' ";
+
+                oOraCmd.CommandText = strCmd;
+
+
+                OracleDataReader dataReader = oOraCmd.ExecuteReader();
+
+                dt.Load(dataReader);
+
+
+                CloseOracleConnection();
+            }
+
+
+
+
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+
+                CloseOracleConnection();
+            }
+            return dt;
+        }
+        public bool BulkInsertBillInfoDataIntoMSSQL(DataTable BillCalInfo, int billCategory)
+        {
+            List<BillInfo> oBillInfoListTemp = new List<BillInfo>();
+            bool isCompleteOp = false;
+            try
+            {
+                oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+
+                int count = 0;
+                //while (count < BillCalInfo.Rows.Count)
+                
+                while (count < BillCalInfo.Rows.Count && count < 100000)
+                {
+                    try
+                    {
+                        oBillInfo = new BillInfo();
+                        string billNo = BillCalInfo.Rows[count]["BILL_NO"].ToString().Trim();
+                        oBillInfo = oOBLDESCOBILLEntities.BillInfoes.FirstOrDefault(t => t.BILL_NO == billNo);
+                        if (oBillInfo == null)
+                        {
+                            oBillInfo = new BillInfo();
+                            oBillInfo.BILL_NO = BillCalInfo.Rows[count]["BILL_NO"].ToString();
+                            oBillInfo.ACCOUNT_NO = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ACCOUNT_NO"].ToString())) ? "" : BillCalInfo.Rows[count]["ACCOUNT_NO"].ToString();
+                            oBillInfo.YEAR = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["YEAR"].ToString())) ? CultureInfo.CurrentCulture.Calendar.ToFourDigitYear(Convert.ToInt32(oBillInfo.BILL_NO.Substring(2, 2))) : Convert.ToInt32(BillCalInfo.Rows[count]["YEAR"].ToString());
+                            oBillInfo.MONTH = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["MONTH"].ToString())) ? Convert.ToInt32(oBillInfo.BILL_NO.Substring(0, 2)) : Convert.ToInt32(BillCalInfo.Rows[count]["MONTH"]);
+                            oBillInfo.TARIFF = BillCalInfo.Rows[count]["TARIFF"].ToString();
+                            oBillInfo.TOTAL_AMOUNT = Convert.ToDecimal(BillCalInfo.Rows[count]["TOTAL_AMOUNT"]);
+                            oBillInfo.VAT_TOTAL = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["VAT"].ToString())) ? 0 : Convert.ToDecimal(BillCalInfo.Rows[count]["VAT"]);
+                            oBillInfo.LPC = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["LPC"].ToString())) ? 0 : Convert.ToDecimal(BillCalInfo.Rows[count]["LPC"].ToString());
+                            //oBillInfo.ISSUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString())) ? (DateTime?)null : DateTime.ParseExact(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString(),"yyyy/MM/dd",CultureInfo.InvariantCulture).Date;
+                            //oBillInfo.DUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DUE_DATE"].ToString())) ? (DateTime?)null : DateTime.ParseExact(BillCalInfo.Rows[count]["DUE_DATE"].ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture).Date;
+                            oBillInfo.ISSUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString())) ? (DateTime?)null : Convert.ToDateTime(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString()).Date;
+                            oBillInfo.DUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DUE_DATE"].ToString())) ? (DateTime?)null : Convert.ToDateTime(BillCalInfo.Rows[count]["DUE_DATE"].ToString()).Date;
+                            oBillInfo.PAID = "0";
+                            oBillInfo.DEPT_ID = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DEPT_ID"].ToString())) ? string.Empty : BillCalInfo.Rows[count]["DEPT_ID"].ToString();
+                            
+                            oBillInfo.ISACTIVE = true;
+                            oBillInfo.CREATEDBY = 00000000;
+                            //oBillInfo.CREATEDON = DateTime.Now;
+
+                            oBillInfo.BILL_CATAGORY = billCategory.ToString();
+                            if (oBillInfo.BILL_CATAGORY == "2")
+                            {
+                                oBillInfo.ORGANIZATION_CODE =(string.IsNullOrEmpty(BillCalInfo.Rows[count]["ORGANIZATION_CODE"].ToString())) ? "" : BillCalInfo.Rows[count]["ORGANIZATION_CODE"].ToString();
+                            }
+                            if (SendDatatoDB(oBillInfo))
+                            {
+                                if (oBillInfo.BILL_CATAGORY == "1")
+                                {
+                                    UpdateFeesCalculationFields(oBillInfo.BILL_NO);
+                                }
+                                else if (oBillInfo.BILL_CATAGORY == "2")
+                                {
+                                    UpdateBillCalculationFields(oBillInfo.BILL_NO);
+                                }
+                            }
+                            else
+                            {
+                                
+                                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : BILL NO: " + BillCalInfo.Rows[count]["BILL_NO"].ToString() + " ( " + billCategory + ") ");
+                    
+                            }
+
+                        }
+                        else
+                        {
+                            oOBLDESCOBILLEntities.BillInfoes.DeleteObject(oBillInfo);
+                            oOBLDESCOBILLEntities.SaveChanges();
+                            oOBLDESCOBILLEntities.AddToBillInfoes(oBillInfo);
+                        }
+
+                        
+                        count++;
+                    }
+                    catch (Exception exp)
+                    {
+                        count++;
+                        StackTrace trace = new System.Diagnostics.StackTrace(exp, true);
+                        WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : BILL NO: " + BillCalInfo.Rows[count]["BILL_NO"].ToString() + " ( " + billCategory + ") ====> Exception: " + exp.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());                    
+                    }
+                }
+
+                isCompleteOp = true;
+            }
+            catch (Exception ex)
+            {
+                isCompleteOp = false;
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+            
+            }
+            return isCompleteOp;
+        }
+
+        public bool InsertBillInfoDataIntoMSSQL(DataTable BillCalInfo, int billCategory)
+        {
+            List<BillInfo> oBillInfoListTemp = new List<BillInfo>();
+            bool isCompleteOp = false;
+            try
+            {
+                oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+
+                int count = 0;
+                while (count < BillCalInfo.Rows.Count)
+                
+                //while (count < BillCalInfo.Rows.Count && count < 100000)
+                {
+                    try
+                    {
+                        oBillInfo = new BillInfo();
+                        string billNo = BillCalInfo.Rows[count]["BILL_NO"].ToString().Trim();
+                        oBillInfo = oOBLDESCOBILLEntities.BillInfoes.FirstOrDefault(t => t.BILL_NO == billNo);
+                        if (oBillInfo == null)
+                        {
+                            oBillInfo = new BillInfo();
+                            oBillInfo.BILL_NO = BillCalInfo.Rows[count]["BILL_NO"].ToString();
+                            oBillInfo.ACCOUNT_NO = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ACCOUNT_NO"].ToString())) ? "" : BillCalInfo.Rows[count]["ACCOUNT_NO"].ToString();
+                            oBillInfo.YEAR = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["YEAR"].ToString())) ? CultureInfo.CurrentCulture.Calendar.ToFourDigitYear(Convert.ToInt32(oBillInfo.BILL_NO.Substring(2, 2))) : Convert.ToInt32(BillCalInfo.Rows[count]["YEAR"].ToString());
+                            oBillInfo.MONTH = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["MONTH"].ToString())) ? Convert.ToInt32(oBillInfo.BILL_NO.Substring(0, 2)) : Convert.ToInt32(BillCalInfo.Rows[count]["MONTH"]);
+                            oBillInfo.TARIFF = BillCalInfo.Rows[count]["TARIFF"].ToString();
+                            oBillInfo.TOTAL_AMOUNT = Convert.ToDecimal(BillCalInfo.Rows[count]["TOTAL_AMOUNT"]);
+                            oBillInfo.VAT_TOTAL = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["VAT"].ToString())) ? 0 : Convert.ToDecimal(BillCalInfo.Rows[count]["VAT"]);
+                            oBillInfo.LPC = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["LPC"].ToString())) ? 0 : Convert.ToDecimal(BillCalInfo.Rows[count]["LPC"].ToString());
+                            //oBillInfo.ISSUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString())) ? (DateTime?)null : DateTime.ParseExact(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString(),"yyyy/MM/dd",CultureInfo.InvariantCulture).Date;
+                            //oBillInfo.DUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DUE_DATE"].ToString())) ? (DateTime?)null : DateTime.ParseExact(BillCalInfo.Rows[count]["DUE_DATE"].ToString(), "yyyy/MM/dd", CultureInfo.InvariantCulture).Date;
+                            oBillInfo.ISSUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString())) ? (DateTime?)null : Convert.ToDateTime(BillCalInfo.Rows[count]["ISSUE_DATE"].ToString()).Date;
+                            oBillInfo.DUE_DATE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DUE_DATE"].ToString())) ? (DateTime?)null : Convert.ToDateTime(BillCalInfo.Rows[count]["DUE_DATE"].ToString()).Date;
+                            oBillInfo.PAID = "0";
+                            oBillInfo.DEPT_ID = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["DEPT_ID"].ToString())) ? string.Empty : BillCalInfo.Rows[count]["DEPT_ID"].ToString();
+
+                            oBillInfo.ISACTIVE = true;
+                            oBillInfo.CREATEDBY = 00000000;
+                            //oBillInfo.CREATEDON = DateTime.Now;
+
+                            oBillInfo.BILL_CATAGORY = billCategory.ToString();
+                            if (oBillInfo.BILL_CATAGORY == "2")
+                            {
+                                //oBillInfo.ORGANIZATION_CODE = BillCalInfo.Rows[count]["ORGANIZATION_CODE"].ToString();
+                                oBillInfo.ORGANIZATION_CODE = (string.IsNullOrEmpty(BillCalInfo.Rows[count]["ORGANIZATION_CODE"].ToString())) ? "" : BillCalInfo.Rows[count]["ORGANIZATION_CODE"].ToString();
+                            }
+                            if (SendDatatoDB(oBillInfo))
+                            {
+                                if (oBillInfo.BILL_CATAGORY == "1")
+                                {
+                                    UpdateFeesCalculationFields(oBillInfo.BILL_NO);
+                                }
+                                else if (oBillInfo.BILL_CATAGORY == "2")
+                                {
+                                    UpdateBillCalculationFields(oBillInfo.BILL_NO);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            oOBLDESCOBILLEntities.BillInfoes.DeleteObject(oBillInfo);
+                            oOBLDESCOBILLEntities.SaveChanges();
+                            oOBLDESCOBILLEntities.AddToBillInfoes(oBillInfo);
+                        }
+
+
+                        count++;
+                    }
+                    catch (Exception exp)
+                    {
+                        count++;
+                        StackTrace trace = new System.Diagnostics.StackTrace(exp, true);
+                        WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : BILL NO: " + BillCalInfo.Rows[count]["BILL_NO"].ToString() + " ( " + billCategory + ") ====> Exception: " + exp.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+                    }
+                }
+
+                isCompleteOp = true;
+            }
+            catch (Exception ex)
+            {
+                isCompleteOp = false;
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+
+            }
+            return isCompleteOp;
+        }
+
+
+        public void UpdateFeesCalculationFields(string FeesBillID)
+        {
+            try
+            {
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                String strUpdateCmd = " UPDATE DESCO.FEES_CALCULATION SET BATCH_OB= 1 WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL AND BILL_NO='" + FeesBillID + "'";
+
+                OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);
+
+                oOraCmd.CommandText = strUpdateCmd;
+                oOraCmd.ExecuteNonQuery();
+                CloseOracleConnection();
+            }
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : BILL NO: " + FeesBillID + " ( 1 ) ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());                    
+            }
+        }
+
+        public void UpdateFeesCalculationFields()
+        {
+
+            OpenDBConnectionAccess();
+            oOraCmd = new OracleCommand();
+            oOraCmd.Connection = oOracleConnection;
+            oOraCmd.CommandType = System.Data.CommandType.Text;
+            oOraCmd.CommandTimeout = 960000;
+
+            String strUpdateCmd = " UPDATE DESCO.FEES_CALCULATION SET BATCH_OB= 1 WHERE (BATCH_OB IS NULL OR BATCH_OB=0)  " +
+                                    "AND YEAR IS NOT NULL AND MONTH IS NOT NULL";           
+
+            OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);       
+
+            oOraCmd.CommandText = strUpdateCmd;
+            oOraCmd.ExecuteNonQuery();
+            CloseOracleConnection();
+        }
+
+        public void UpdateFeesCalculationFields(string billMonth, string billYear)
+        {
+
+            OpenDBConnectionAccess();
+            oOraCmd = new OracleCommand();
+            oOraCmd.Connection = oOracleConnection;
+            oOraCmd.CommandType = System.Data.CommandType.Text;
+            oOraCmd.CommandTimeout = 960000;
+
+            String strUpdateCmd = " UPDATE DESCO.FEES_CALCULATION SET BATCH_OB= 1 WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL " +
+                                    "AND YEAR=" + billYear+" MONTH= "+ billMonth ;
+
+            OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);
+
+            oOraCmd.CommandText = strUpdateCmd;
+            oOraCmd.ExecuteNonQuery();
+            CloseOracleConnection();
+        }
+
+        public void UpdateBillCalculationFields(string BillCalBillID)
+        {
+            try
+            {
+                OpenDBConnectionAccess();
+                oOraCmd = new OracleCommand();
+                oOraCmd.Connection = oOracleConnection;
+                oOraCmd.CommandType = System.Data.CommandType.Text;
+                oOraCmd.CommandTimeout = 960000;
+
+                String strUpdateCmd = " UPDATE DESCO.BILL_CALCULATION SET BATCH_OB = 1 WHERE(BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND BILL_NO='" + BillCalBillID + "'";
+                OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);
+
+                oOraCmd.CommandText = strUpdateCmd;
+                oOraCmd.ExecuteNonQuery();
+                CloseOracleConnection();
+            }
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload UNSUCCESSFUL : ====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());
+            }
+        }
+
+        public void UpdateBillCalculationFields()
+        {
+            OpenDBConnectionAccess();
+            oOraCmd = new OracleCommand();
+            oOraCmd.Connection = oOracleConnection;
+            oOraCmd.CommandType = System.Data.CommandType.Text;
+            oOraCmd.CommandTimeout = 960000;
+
+            String strUpdateCmd = " UPDATE DESCO.BILL_CALCULATION SET BATCH_OB= 1 "+
+                " WHERE (BATCH_OB IS NULL OR BATCH_OB=0) AND (PAID <> 1 OR PAID IS NULL) AND YEAR IS NOT NULL AND MONTH IS NOT NULL";
+
+
+            OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);
+
+            oOraCmd.CommandText = strUpdateCmd;
+            oOraCmd.ExecuteNonQuery();
+            CloseOracleConnection();
+        }
+
+        public void UpdateBillCalculationFields(string billMonth, string billYear)
+        {
+            OpenDBConnectionAccess();
+            oOraCmd = new OracleCommand();
+            oOraCmd.Connection = oOracleConnection;
+            oOraCmd.CommandType = System.Data.CommandType.Text;
+            oOraCmd.CommandTimeout = 960000;
+
+            String strUpdateCmd = " UPDATE DESCO.BILL_CALCULATION SET BATCH_OB= 1 WHERE(BATCH_OB IS NULL OR BATCH_OB=0) AND YEAR IS NOT NULL AND MONTH IS NOT NULL " +
+                " AND (PAID <> 1 OR PAID IS NULL) AND YEAR=" + billYear + " AND MONTH=" + billMonth;
+
+
+            OracleDataAdapter oOracleDataAdapter = new OracleDataAdapter(oOraCmd);
+
+            oOraCmd.CommandText = strUpdateCmd;
+            oOraCmd.ExecuteNonQuery();
+            CloseOracleConnection();
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            oOBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+
+
+        }
+
+        private void Ora2MSQL_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                 WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload ");
+                DataTable dtFeesInfo = new DataTable();
+                dtFeesInfo = OracleGetFeesInfoData();
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload : DESCO FEE data count :" + dtFeesInfo.Rows.Count.ToString());
+                if (dtFeesInfo.Rows.Count > 0)
+                {
+                    
+                    InsertBulkDataToDB(dtFeesInfo, "1");
+                    
+                }
+                
+                DataTable dtBillInfo = new DataTable();
+                dtBillInfo = OracleGetBillInfoData();
+                WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload : DESCO BILL data count :" + dtBillInfo.Rows.Count.ToString());                    
+                 if (dtBillInfo.Rows.Count > 0)
+                {
+                    
+                    InsertBulkDataToDB(dtBillInfo, "2");
+                }
+                 WriteTextInTextFile_DESCO2OBL(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : DESCO to OBL data upload : DATA UPLOADED COMPLETE SUCCESSFULLY");
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Data save unsuccessful due to "+ex.Message);
+            }
+
+        }
+
+        private void MSQL2Ora_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                oTranList = new List<Tran>();
+                oTranList = SQLServerGetTransInfo();
+                WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " :  data count ==> Exception: " + oTranList.Count.ToString());            
+                if (oTranList.Count > 0)
+                    OracleSetTransInfo(oTranList);
+                
+            }
+            catch (Exception ex)
+            {
+                StackTrace trace = new System.Diagnostics.StackTrace(ex, true);
+                WriteTextInTextFile_OBL2DESCO(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + " : OBL to DESCO data upload UNSUCCESSFUL :====> Exception: " + ex.Message + " Line Number: " + trace.GetFrame(0).GetFileLineNumber());            
+                
+            }
+        }
+
+        public void WriteTextInTextFile_DESCO2OBL(string message)
+        {
+            bool exists = System.IO.Directory.Exists(destinationPath);
+            if (!exists)
+                System.IO.Directory.CreateDirectory(destinationPath);
+            FileStream fs1 = new FileStream(destinationPath + "\\Data_log_DESCO2OBL.txt", FileMode.Append, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(fs1);
+            writer.WriteLine(message);
+            writer.Close();
+        }
+
+        public void WriteTextInTextFile_OBL2DESCO(string message)
+        {
+            bool exists = System.IO.Directory.Exists(destinationPath);
+            if (!exists)
+                System.IO.Directory.CreateDirectory(destinationPath);
+            FileStream fs1 = new FileStream(destinationPath + "\\Data_log_OBL2DESCO.txt", FileMode.Append, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(fs1);
+            writer.WriteLine(message);
+            writer.Close();
+        }
+
+        public bool SendDatatoDB(object obj)
+        {
+            using (TransactionScope oTs = new TransactionScope())
+            {
+                OBLDESCOBILLEntities1 OBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+                try
+                {
+                    OBLDESCOBILLEntities.AddObject(OBLDESCOBILLEntities.MetadataWorkspace.GetEntityContainer(OBLDESCOBILLEntities.DefaultContainerName, System.Data.Metadata.Edm.DataSpace.CSpace).BaseEntitySets.Where(bes => bes.ElementType.Name == obj.GetType().Name).FirstOrDefault().Name, obj);
+                    OBLDESCOBILLEntities.SaveChanges();
+                    oTs.Complete();
+                    return true;
+                }
+                catch (Exception ex) 
+                { 
+                    oTs.Dispose();
+                    
+                    return false;
+                }
+            }
+            
+        }
+        
+        public bool InsertBulkDataToDB(DataTable objT, string billCatagory)
+        {
+            if(billCatagory == "1")
+                objT.Columns["PAID"].ReadOnly = false;
+            objT.Columns["ORGANIZATION_CODE"].ReadOnly = false;
+            foreach (DataRow dr in objT.Rows)
+            {
+                foreach (DataColumn col in objT.Columns)
+                {
+                    if (col.DataType == typeof(System.String))
+                    {
+                        dr[col] = dr[col].ToString().Trim();
+                    }
+                    else if (col.DataType == typeof(System.Decimal) || col.DataType == typeof(System.Int32))
+                    {
+                        dr[col] = string.IsNullOrEmpty(dr[col].ToString().Trim()) ? 0 : Convert.ToDecimal(dr[col].ToString().Trim());
+                    }
+                    else if (col.DataType == typeof(System.DateTime))
+                    {
+                        if (string.IsNullOrEmpty(dr[col].ToString().Trim()))
+                            dr[col] = DBNull.Value;
+                            //dr[col] = SqlDateTime.MinValue.Value;
+                        else
+                            dr[col] = Convert.ToDateTime(dr[col].ToString().Trim()).Date;
+                    }
+                    
+                }
+            }
+
+            OBLDESCOBILLEntities1 OBLDESCOBILLEntities = new OBLDESCOBILLEntities1();
+            object obTmp;
+            bool result = true;
+            if (objT != null && objT.Rows.Count > 0)
+            {
+                obTmp = objT.Rows[0];
+                EntityConnection dbConn = (EntityConnection)OBLDESCOBILLEntities.Connection;
+                if (dbConn.State == ConnectionState.Closed) dbConn.Open();
+                try
+                {
+
+                    using (TransactionScope oTS = new TransactionScope())
+                    {
+                        SqlBulkCopy bulkInsert = new SqlBulkCopy((SqlConnection)dbConn.StoreConnection);
+                        bulkInsert.DestinationTableName = "BillInfoTest";                        
+                        bulkInsert.WriteToServer(objT);
+
+                        oTS.Complete();
+                        dbConn.Close();
+                        result = true;
+                    }
+
+                    if (billCatagory == "1")
+                    {
+                        oOBLDESCOBILLEntities.BillInfoTransfer("1");
+                        oOBLDESCOBILLEntities.SaveChanges();
+                        UpdateFeesCalculationFields();
+                    }
+                    else if (billCatagory == "2")
+                    {
+                        oOBLDESCOBILLEntities.BillInfoTransfer("2");
+                        oOBLDESCOBILLEntities.SaveChanges();
+                        UpdateBillCalculationFields();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    dbConn.Close();
+                    result = false;
+                }
+            }
+            else
+                result = false;
+            return result;
+        }                                                                                                                                                                                                                                                                                                            
+    }
+
+
+}
+
+
+monika
+01754757542
+
+013010002369
+013011702387
+011008401802

@@ -1,0 +1,365 @@
+﻿@model OBLContactCenter.Models.TaskInfo
+
+
+<link href="~/Content/CustomeTheme/pages/fileinput.min.css" rel="stylesheet" />
+<script src="~/Scripts/CustomeJS/fileinput.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("form").validate().settings.ignore = "";
+
+        $("form").removeData("validator");
+        $("form").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("form");
+
+        $("#ctrlFile").fileinput({
+            previewFileType: "image",
+            showUpload: false,
+            browseClass: "btn btn-success",
+            browseIcon: '<i class="fa fa-plus"></i>',
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: '<i class="glyphicon glyphicon-trash"></i>'
+        });
+
+        $("#ddlAction").change(function () {
+            $("#ddlAsgnGroup").empty();
+            var selectedValue = $("#ddlAction").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupByAction", "CRMTask")',
+                dataType: 'json',
+                data: { id: selectedValue },
+                success: function (states) {
+                    $.each(states, function (i, state) {
+                        $("#ddlAsgnGroup").append('<option value="' + state.Value + '">' +
+                             state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    $("#ddlAsgnGroup").append('<option value="">Select</option>');
+                    alert('Failed to retrieve Group.' + ex);
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetStatusByAction", "CRMTask")',
+                dataType: 'json',
+                data: { id: selectedValue },
+                success: function (data) {
+                    if (data == "0") {
+                        $("input[name='CCMEMO.ISOPEN'][value='false']").prop('checked', true);
+                    }
+                    else
+                        $("input[name='CCMEMO.ISOPEN'][value='true']").prop('checked', true);
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve Status.' + ex);
+                }
+            });
+        });
+    });
+</script>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("SubmitTaskMemo", "CRMTask", FormMethod.Post, new { @class = "form-horizental", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-book-open"></i>CRM Task
+                    </div>
+                    <div class="actions btn-set">
+                        @if (!Model.IsTaskBusy)
+                        {
+                            <button class="btn green" type="submit"><i class="fa fa-check"></i>Save</button>
+                        }
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div id="hdnDiv" style="display: none;">
+                        @Html.HiddenFor(m => m.CCMEMO.ID);
+                        @Html.HiddenFor(m => m.CCMEMO.TICKETNO);
+                        @Html.HiddenFor(m => m.CCMEMO.MEMOTYPE);
+
+                        @Html.HiddenFor(m => m.CCMEMO.PRIORITY);
+                        @Html.HiddenFor(m => m.CCMEMO.CUSTOMERNAME);
+                        @Html.HiddenFor(m => m.CCMEMO.CUSTOMERCONTACT);
+                        @Html.HiddenFor(m => m.CCMEMO.CUSTACNO);
+                        @Html.HiddenFor(m => m.CCMEMO.CUSTCARDNO);
+                        @Html.HiddenFor(m => m.CCMEMO.REQUESTDETAILS);
+                        @Html.HiddenFor(m => m.CCMEMO.CALLCATEGORY);
+                        @Html.HiddenFor(m => m.CCMEMO.CALLTYPE);
+                        @Html.HiddenFor(m => m.CCMEMO.SOURCETYPE);
+                        @Html.HiddenFor(m => m.CCMEMO.PRODUCTTYPE);
+
+
+                        @Html.HiddenFor(m => m.CCMEMO.CREATEDBY);
+                        @Html.HiddenFor(m => m.CCMEMO.CREATEDON);
+                        @Html.HiddenFor(m => m.CCMEMO.MODIFIEDBY);
+                        @Html.HiddenFor(m => m.CCMEMO.MODIFIEDON);
+                    </div>
+                    @if (Model.IsTaskBusy)
+                    {
+                        <div class="note note-danger">
+                            <div class="row">
+                                <div class="col-sm-12 control-label">
+                                    <span class="fa  fa-anchor"></span> Ticket is processed by <span class="fa  fa-user"></span> @Model.TaskOccupiedBy.UserId (@Model.TaskOccupiedBy.OccupiedBy) at <span class="fa fa-calendar"></span>  @Model.TaskOccupiedBy.TaskTakenDate
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="note note-success">
+                        <div class="row">
+                            <div class="col-sm-12 control-label">
+                                <span class="fa  fa-user"></span>Ticket Generated By : <b>@Model.CCMEMO.CCUSER.EMPLOYEENAME (@Model.CCMEMO.CCUSER.CCGROUP.GROUPNAME)</b> <span class="fa fa-calendar"></span>  @Model.CCMEMO.CREATEDON
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note note-info">
+                        <div class="col-sm-3">
+                            <span class="fa fa-ticket"></span>Ticket No : <b>@Model.CCMEMO.TICKETNO</b>
+                        </div>
+                        <label class="col-md-3 control-label">
+                            Memo Status:
+                            @if (Model.CCMEMO.ISOPEN)
+                            { <span class="label label-info"><b> OPEN </b></span>}
+                            else
+                            {<span class="label label-danger"><b>CLOSE</b></span>}
+                        </label>
+                        <label class="control-label">
+                            Priority Status:
+                            @if (Model.CCMEMO.CCENUMERATION2.NAME.ToLower().Trim().Contains("high"))
+                            {
+                                <span class="label label-danger"><b>@Model.CCMEMO.CCENUMERATION2.NAME</b><i class="icon-bell"></i></span>
+                            }
+                            @if (Model.CCMEMO.CCENUMERATION2.NAME.ToLower().Trim().Contains("medium"))
+                            {
+                                <span class="label label-warning"><b>@Model.CCMEMO.CCENUMERATION2.NAME</b><i class="icon-bell"></i></span>
+                            }
+                            @if (Model.CCMEMO.CCENUMERATION2.NAME.ToLower().Trim().Contains("low"))
+                            {
+                                <span class="label label-info"><b>@Model.CCMEMO.CCENUMERATION2.NAME</b><i class="icon-bell"></i></span>
+                            }
+
+                        </label>
+
+                    </div>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_info" data-toggle="tab">Information </a>
+                            </li>
+                            <li>
+                                <a href="#tab_attach" data-toggle="tab"><i class=" icon-paper-clip"></i>Attachment <span class="badge badge-success">@Model.CCMEMO.CCMEMOATTACHMENTs.Count</span></a>
+                            </li>
+                            <li>
+                                <a href="#tab_history" data-toggle="tab"><i class="fa fa-cogs"></i> History <span class="badge badge-success">@Model.CCMEMO.CCMEMOLOGs.Count</span> </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content no-space">
+                            <div class="tab-pane active" id="tab_info">
+                                <div class="form-body">
+                                    <div class="panel panel-info">
+
+                                        <div class="panel-body">
+                                            <div class="row panel-info">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Customer Name</label>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label sale-num">: @Model.CCMEMO.CUSTOMERNAME</label>
+                                                    </div>
+                                                    <label class="col-md-2 control-label">Contact No</label>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label sale-num">: @Model.CCMEMO.CUSTOMERCONTACT</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row panel-info">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label label-icon">A/C No</label>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label sale-num">: @Model.CCMEMO.CUSTACNO</label>
+                                                    </div>
+                                                    <label class="col-md-2 control-label">Card No</label>
+                                                    <div class="col-md-4">
+                                                        <label class="control-label sale-num">: @Model.CCMEMO.CUSTCARDNO</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Request Details</label>
+                                                    <div class="col-md-10">
+                                                        <label class="control-label">: @Model.CCMEMO.REQUESTDETAILS</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            @*<div class="note note-success">
+                                                    <span class="fa  fa-ticket"></span><b>Details</b>
+                                                </div>*@
+
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Call Catagory</label>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">: @Model.CCMEMO.CCCALLCATAGORY.NAME</label>
+                                                </div>
+                                                <label class="col-md-2 control-label">Call Types</label>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">: @Model.CCMEMO.CCCALLTYPE.TYPENAME</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Source Type</label>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">: @Model.CCMEMO.CCENUMERATION4.NAME</label>
+                                                </div>
+                                                <label class="col-md-2 control-label">Product Type</label>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">: @Model.CCMEMO.CCENUMERATION3.NAME</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Action </label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.CCMEMO.LASTACTIONTYPE, (IEnumerable<SelectListItem>)ViewBag.ActionList, "Select", new { @class = "form-control", id = "ddlAction" })
+                                                    @Html.ValidationMessageFor(m => m.CCMEMO.LASTACTIONTYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Assign Group </label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.CCMEMO.ASSIGNGROUP, (IEnumerable<SelectListItem>)ViewBag.AssignGroupList, "Select", new { @class = "form-control", id = "ddlAsgnGroup" })
+                                                    @Html.HiddenFor(m => m.CCMEMO.ASSIGNGROUP)
+                                                    @Html.ValidationMessageFor(m => m.CCMEMO.ASSIGNGROUP, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Action Details</label>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(m => m.CCMEMO.LASTACTIONDETAILS, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Memo Status</label>
+                                                <div class="col-md-9">
+                                                    @foreach (var mType in ViewBag.StatusList as IEnumerable<SelectListItem>)
+                                                    {
+                                                        <label class="radio-inline">
+                                                            <span>
+                                                                @Html.RadioButtonFor(m => m.CCMEMO.ISOPEN, mType.Value)
+                                                            </span>
+                                                            @mType.Text
+                                                        </label>
+                                                    }
+                                                    @Html.ValidationMessageFor(m => m.CCMEMO.ISOPEN, null, new { @class = "alert alert-danger display" })
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_attach">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Add Files</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <span class="btn green fileinput-button">
+                                                <input id="ctrlFile" name="ctrlFile" type="file" multiple class="file-loading" data-preview-file-type="any" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet box green">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Attachment List
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="display: block;">
+                                        @if (Model.CCMEMO.CCMEMOATTACHMENTs != null && Model.CCMEMO.CCMEMOATTACHMENTs.Count > 0)
+                                        {
+                                            var fileDowngrid = new WebGrid(Model.CCMEMO.CCMEMOATTACHMENTs, rowsPerPage: 10, canPage: false, canSort: false, ajaxUpdateContainerId: "detailInfo");
+                                            //fileDowngrid.PagerList(WebGridPagerModes.All, paginationStyle: "Pagination");
+                                            @fileDowngrid.GetHtml(
+                                                    tableStyle: "table table-bordered table-striped table-condensed flip-content",
+                                                    headerStyle: "flip-content",
+                                                    columns: new[]{
+                                                    //fileDowngrid.Column("ID",header: "ID"),
+                                                    fileDowngrid.Column("FILENAME",header: "File Name"),
+                                                    fileDowngrid.Column("CCUSER.EMPLOYEENAME",header: "Uploaded By"),
+                                                    fileDowngrid.Column("CREATEDON",header: "Upload Date"),
+                                                    fileDowngrid.Column("", "Action", format: @<a href="@Url.Action("DownloadFiles","CRM", new { id = @item.ID})" class="btn green downloadFile" data-id="@item.ID">Download<i class="fa fa-download"></i></a>)
+                                                },
+                                                                                        mode: WebGridPagerModes.All
+                                                                                        );
+                                        }
+                                        else
+                                        {
+                                            <div class="note note-warning">
+                                                <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_history">
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="display: block;">
+                                        <div class="table-scrollable">
+                                            @if (Model.CCMEMO.CCMEMOLOGs != null && Model.CCMEMO.CCMEMOLOGs.Count > 0)
+                                            {
+                                                var historyGrid = new WebGrid(Model.CCMEMO.CCMEMOLOGs, rowsPerPage: 10, canPage: false, canSort: false, ajaxUpdateContainerId: "detailInfo");
+                                                // historyGrid.PagerList(WebGridPagerModes.All, paginationStyle: "Pagination");
+                                                @historyGrid.GetHtml(
+                                                    tableStyle: "table table-bordered table-striped table-condensed flip-content",
+                                                    headerStyle: "flip-content",
+                                                    columns: new[]{
+                                                    //historyGrid.Column("ID",header: "ID"),
+                                                    historyGrid.Column("CCUSER.EMPLOYEENAME",header: "Acted By"),
+                                                    //historyGrid.Column("CCUSER.CCGROUP.GROUPNAME",header: "Requested From"),
+                                                    historyGrid.Column("CREATEDON",header: "Action Date"),
+                                                    historyGrid.Column("CCENUMERATION.NAME",header: "Action"),
+                                                    historyGrid.Column("ACTIONDETAILS",header: "Details"),
+                                                    historyGrid.Column("CCGROUP.GROUPNAME",header: "Group")
+                                                },
+                                                 mode: WebGridPagerModes.All
+                                                 );
+                                            }
+                                            else
+                                            {
+                                                <div class="note note-warning">
+                                                    <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

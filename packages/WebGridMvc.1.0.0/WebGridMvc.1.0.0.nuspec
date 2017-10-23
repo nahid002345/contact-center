@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WebGridMvc</id>
+    <version>1.0.0</version>
+    <title>WebGrid Mvc</title>
+    <authors>Stuart Leeks</authors>
+    <owners>Stuart Leeks</owners>
+    <licenseUrl>http://archive.msdn.microsoft.com/mag201107WebGrid/Project/License.aspx</licenseUrl>
+    <projectUrl>http://blogs.msdn.com/b/stuartleeks/archive/2011/07/03/get-the-most-out-of-webgrid-in-asp-net-mvc.aspx</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WebGridMvc contains the WebGrid customisation and helpers from the MSDN magazine article "Get the Most out of WebGrid in ASP.NET MVC" published in July 2011 at http://msdn.microsoft.com/en-us/magazine/hh288075.aspx.
+      It targets ASP.NET MVC 3. The full source (with sample project) are available at http://archive.msdn.microsoft.com/mag201107WebGrid/Release/ProjectReleases.aspx?ReleaseId=5667</description>
+    <summary>WebGridMvc contains the WebGrid customisation and helpers from the MSDN magazine article "Get the Most out of WebGrid in ASP.NET MVC" published in July 2011 at http://msdn.microsoft.com/en-us/magazine/hh288075.aspx.
+      It targets ASP.NET MVC 3.</summary>
+    <copyright>See the license terms http://archive.msdn.microsoft.com/mag201107WebGrid/Project/License.aspx</copyright>
+    <tags>WebGrid MVC</tags>
+  </metadata>
+</package>

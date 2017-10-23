@@ -1,0 +1,64 @@
+﻿@model List<OBLContactCenter.Models.RoleActionGroup>
+
+<div class="portlet box blue-ebonyclay">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-grid"></i>Action wise Group
+             List
+        </div>
+    </div>
+
+    <div class="portlet-body flip-scroll">
+        @if (Model != null)
+        {
+            using (Html.BeginForm("SaveActionGroupList", "ActionAsgGroupSetting", FormMethod.Post, new { id = "frmRoleMenu", @class = "form-horizental" }))
+            {
+                var grid = new WebGrid(Model, rowsPerPage: 10, canPage: false, canSort: false);
+                
+            @grid.GetHtml(
+                         tableStyle: "table table-bordered table-striped table-condensed flip-content",
+                         headerStyle: "flip-content",
+
+                         columns: new[]{
+                             grid.Column(
+                        header: "",
+                        format:@<text>
+            @if (item.IsAssigned == null)
+                            {
+<input name="chkSelect" type="checkbox" value="@item.GroupId" />
+                            }
+                            else
+                            {
+<input name="chkSelect" type="checkbox" value="@item.GroupId" checked="checked" />
+                            }
+
+            </text>
+                    ),
+
+                           grid.Column("GroupName",header: "GROUP NAME"),
+                           grid.Column(format:@<input type="hidden" name="MemoTypeID" id="MemoTypeID" value="@item.MemoTypeID" />),
+                           grid.Column(format:@<input type="hidden" name="ActionID" id="ActionID" value="@item.ActionID" />),
+            grid.Column(format:@<input type="hidden" name="RoleId" id="RoleId" value="@item.RoleId" />)
+                            },
+                                               mode: WebGridPagerModes.All
+                                               );
+               
+
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-6">
+                        <button type="submit" class="btn green" name="btnName" value="update" id="btnSaveRoleMenu">Save</button>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+        else
+        {
+            <div class="note note-warning">
+                <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,11 @@
+Begin scripting at 13-Aug-15 6:26:05 PM
+Scripted out 2 rows from table [OBLCONTACTCENTER].[dbo].[CCCALLCATAGORY] (39.33 ms) 
+Scripted out 3 rows from table [OBLCONTACTCENTER].[dbo].[CCCALLTYPE] (12.34 ms) 
+Scripted out 6 rows from table [OBLCONTACTCENTER].[dbo].[CCENUMERATION] (5.43 ms) 
+Scripted out 2 rows from table [OBLCONTACTCENTER].[dbo].[CCGROUP] (4.74 ms) 
+Scripted out 1 row from table [OBLCONTACTCENTER].[dbo].[CCMEMOATTACHMENT] (4.07 ms) 
+Scripted out 2 rows from table [OBLCONTACTCENTER].[dbo].[CCMEMOLOG] (4.36 ms) 
+Scripted out 2 rows from table [OBLCONTACTCENTER].[dbo].[CCMEMOMASTER] (4.53 ms) 
+Scripted out 2 rows from table [OBLCONTACTCENTER].[dbo].[CCROLE] (12.63 ms) 
+Scripted out 5 rows from table [OBLCONTACTCENTER].[dbo].[CCUSER] (12.34 ms) 
+End scripting at 13-Aug-15 6:26:05 PM

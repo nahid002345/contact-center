@@ -1,0 +1,385 @@
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\OBLContactCenter.dll.config
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\OBLContactCenter.pdb
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Antlr3.Runtime.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.AspNet.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.Core.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OAuth.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OpenId.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\EntityFramework.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Microsoft.Web.Infrastructure.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Newtonsoft.Json.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Net.Http.Formatting.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Helpers.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Http.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Http.WebHost.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Mvc.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Optimization.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Razor.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.Deployment.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.Razor.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\WebGrease.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\WebMatrix.Data.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\WebMatrix.WebData.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\EntityFramework.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Newtonsoft.Json.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Net.Http.Formatting.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Helpers.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Http.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Http.WebHost.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Mvc.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.Razor.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.Deployment.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\System.Web.WebPages.Razor.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\WebMatrix.Data.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\WebMatrix.WebData.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.AspNet.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.Core.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OAuth.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OpenId.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\obj\Debug\OBLContactCenter.csprojResolveAssemblyReference.cache
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\obj\Debug\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter\ModelAppMVC4EF\obj\Debug\OBLContactCenter.pdb
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.pdb
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Antlr3.Runtime.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\EntityFramework.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.Infrastructure.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Optimization.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebGrease.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebGridMvc.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\EntityFramework.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.pdb
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.pdb
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Antlr3.Runtime.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.Infrastructure.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Newtonsoft.Json.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Optimization.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebGrease.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebGridMvc.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Newtonsoft.Json.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.pdb
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Owin.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Web App\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.csprojResolveAssemblyReference.cache
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll.config
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.pdb
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Antlr3.Runtime.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\EntityFramework.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.Infrastructure.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Newtonsoft.Json.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Owin.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Optimization.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebGrease.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebGridMvc.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\EntityFramework.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\WorkStation\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.pdb
+E:\WorkStation\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.csprojResolveAssemblyReference.cache
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll.config
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.pdb
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Antlr3.Runtime.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\EntityFramework.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.Infrastructure.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Newtonsoft.Json.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Owin.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Optimization.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebGrease.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebGridMvc.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\EntityFramework.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.dll
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.pdb
+E:\WorkStation\OBLContactCenter_h\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.csprojResolveAssemblyReference.cache
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll.config
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\OBLContactCenter.pdb
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Antlr3.Runtime.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.Infrastructure.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Newtonsoft.Json.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Owin.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Optimization.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebGrease.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebGridMvc.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\EntityFramework.SqlServer.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\ExpressiveAnnotations.MvcUnobtrusive.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.Core.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Owin.Security.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Net.Http.Formatting.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Helpers.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Http.WebHost.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Mvc.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.Razor.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Deployment.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\System.Web.WebPages.Razor.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.Data.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\WebMatrix.WebData.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.AspNet.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.Core.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OAuth.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.dll
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.pdb
+E:\WorkStation\Application Backup\OBLContactCenter\OBLContactCenter\OBLContactCenter\obj\Debug\OBLContactCenter.csprojResolveAssemblyReference.cache

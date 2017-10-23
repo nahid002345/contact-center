@@ -1,0 +1,298 @@
+﻿@model CCMEMOMASTER
+
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/CustomeTheme/pages/fileinput.min.css" rel="stylesheet" />
+<script src="~/Scripts/CustomeJS/fileinput.min.js"></script>
+<script>
+    /* Initialize your widget via javascript as follows */
+    $(document).ready(function () {
+        $("form").validate().settings.ignore = "";
+        $("#ctrlFile").fileinput({
+            previewFileType: "image",
+            showUpload: false,
+            browseClass: "btn btn-success",
+            browseIcon: '<i class="fa fa-plus"></i>',
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: '<i class="glyphicon glyphicon-trash"></i>'
+        });
+    });
+</script>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CreateMemo", "Home", FormMethod.Post, new { @class = "form-horizental", enctype = "multipart/form-data" }))
+        {
+            <div id="hdnDiv" style="display: none;">
+                @Html.HiddenFor(m => m.ID);
+                @Html.HiddenFor(m => m.TICKETNO);
+                @Html.HiddenFor(m => m.CREATEDBY);
+                @Html.HiddenFor(m => m.CREATEDON);
+                @Html.HiddenFor(m => m.MODIFIEDBY);
+                @Html.HiddenFor(m => m.MODIFIEDON);
+            </div>
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-shopping-cart"></i>CRM Form
+                    </div>
+                    <div class="actions btn-set">
+                        <button class="btn green"><i class="fa fa-check"></i>Save</button>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="note note-info">
+                        <div class="col-sm-3">
+                            <span class="fa  fa-ticket"></span>Ticket No : <b>@Model.TICKETNO</b>
+                        </div>
+                        Memo Status:
+                        <span class="label label-info"><b>@Model.ISOPEN</b></span>
+                        Priority Status:
+                        <span class="label label-warning"><b>@Model.PRIORITY</b></span>
+
+                    </div>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_info" data-toggle="tab">Information </a>
+                            </li>
+                            <li>
+                                <a href="#tab_attach" data-toggle="tab">Attachment <span class="badge badge-success">3 </span></a>
+                            </li>
+                            <li>
+                                <a href="#tab_history" data-toggle="tab">History </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content no-space">
+                            <div class="tab-pane active" id="tab_info">
+                                <div class="form-body">
+                                    <div class="panel panel-info">
+                                        <div class="panel-body">
+                                            <div class="note note-success">
+                                                <span class="fa  fa-ticket"></span><b>Memo Info</b>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Memo Type</label>
+                                                <div class="col-md-2">
+                                                    @Html.DropDownListFor(m => m.MEMOTYPE, (IEnumerable<SelectListItem>)ViewBag.MemoTypeList, "Select", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.MEMOTYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-1 control-label">Priority</label>
+                                                <div class="col-md-3">
+                                                    @Html.DropDownListFor(m => m.PRIORITY, (IEnumerable<SelectListItem>)ViewBag.PriorityList, "Select", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.PRIORITY, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-1 control-label">Status</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Open</option>
+                                                        <option value="">Close</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="note note-success">
+                                                <span class="fa  fa-ticket"></span><b>Customer Info</b>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Customer Name</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.CUSTOMERNAME, new { @class = "form-control", placeholder = "Enter Customer Name" })
+                                                    @Html.ValidationMessageFor(m => m.CUSTOMERNAME, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Contact No</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.CUSTOMERCONTACT, new { @class = "form-control", placeholder = "Enter Customer Contact or Email" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">A/C No</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.CUSTACNO, new { @class = "form-control", placeholder = "Enter Account No" })
+                                                    @Html.ValidationMessageFor(m => m.CUSTACNO, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Card No</label>
+                                                <div class="col-md-4">
+                                                    @Html.TextBoxFor(m => m.CUSTCARDNO, new { @class = "form-control", placeholder = "Enter Card No" })
+                                                    @Html.ValidationMessageFor(m => m.CUSTCARDNO, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Request Details</label>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(m => m.REQUESTDETAILS, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="note note-success">
+                                                <span class="fa  fa-ticket"></span><b>Details</b>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Call Catagory</label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.CALLCATEGORY, (IEnumerable<SelectListItem>)ViewBag.CallCatagoryList, "Select", new { @class = "form-control", id = "ddlCallCatagory" })
+                                                    @Html.ValidationMessageFor(m => m.CALLCATEGORY, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Call Types</label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.CALLTYPE, new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control", id = "ddlCallType" })
+                                                    @Html.ValidationMessageFor(m => m.CALLTYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Source Type</label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.SOURCETYPE, (IEnumerable<SelectListItem>)ViewBag.SourceList, "Select", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.SOURCETYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Product Type</label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.PRODUCTTYPE, (IEnumerable<SelectListItem>)ViewBag.ProductList, "Select", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.PRODUCTTYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Action </label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.LASTACTIONTYPE, (IEnumerable<SelectListItem>)ViewBag.ActionList, "Select", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.LASTACTIONTYPE, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                                <label class="col-md-2 control-label">Assign Group </label>
+                                                <div class="col-md-4">
+                                                    @Html.DropDownListFor(m => m.ASSIGNGROUP, (IEnumerable<SelectListItem>)ViewBag.AssignGroupList, "Select", new { @class = "form-control"})
+                                                    @Html.HiddenFor(m => m.ASSIGNGROUP)
+                                                    @Html.ValidationMessageFor(m => m.ASSIGNGROUP, null, new { @class = "alert alert-danger display" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Action Details</label>
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(m => m.LASTACTIONDETAILS, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_attach">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Add Files</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <span class="btn green fileinput-button">
+                                                <input id="ctrlFile" name="ctrlFile" type="file" multiple class="file-loading" data-preview-file-type="any" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet box green">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Attachment List
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="display: block;">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_history">
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Action History
+                                        </div>
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="display: block;">
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            #
+                                                        </th>
+                                                        <th>
+                                                            Assign Group
+                                                        </th>
+                                                        <th>
+                                                            Action Taken
+                                                        </th>
+                                                        <th>
+                                                            Taken By
+                                                        </th>
+                                                        <th>
+                                                            Date
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            Mark
+                                                        </td>
+                                                        <td>
+                                                            Otto
+                                                        </td>
+                                                        <td>
+                                                            makr124
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-success">
+                                                                Approved
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            2
+                                                        </td>
+                                                        <td>
+                                                            Jacob
+                                                        </td>
+                                                        <td>
+                                                            Nilson
+                                                        </td>
+                                                        <td>
+                                                            jac123
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-info">
+                                                                Pending
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model List<OBLContactCenter.EFnClass.CCENUMERATION>
+
+<div class="portlet box blue-ebonyclay">
+    <div class="portlet-title">
+       <div class="caption">
+                <i class="fa fa-grid"></i>Source Information
+            </div>
+        <div class="tools">
+            <button class="btn green" id="createSource" data-url="@Url.Action("CreateSource", "SourceProductSetting")">Create <i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="portlet-body flip-scroll">
+        @if (Model != null)
+        {
+            var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "");
+            grid.PagerList(WebGridPagerModes.All, paginationStyle: "Pagination");
+
+
+            @grid.GetHtml(
+             tableStyle: "table table-bordered table-striped table-condensed flip-content",
+             headerStyle: "flip-content",
+             columns: new[]{
+               grid.Column("ID",header: "ID"),
+               grid.Column("NAME",header: "Source Name"),
+               grid.Column("VALUE",header: "Remarks"),
+               grid.Column("ISACTIVE", "Status",format: (item) => (item.ISACTIVE) ? Html.Raw("<span class='fa fa-check-square-o'></span>") :
+                                                                                        Html.Raw("<span class='fa fa-times'></span>")),
+                grid.Column("", "Action", format: @<button class="btn red editSource" data-id="@item.ID" data-url="@Url.Action("EditSource", "SourceProductSetting")">Edit <i class="fa fa-edit"></i></button>)
+
+                },
+                          mode: WebGridPagerModes.All
+                          );
+        }
+        else
+        {
+            <div class="note note-warning">
+                <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

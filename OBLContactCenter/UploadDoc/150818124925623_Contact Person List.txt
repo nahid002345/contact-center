@@ -1,0 +1,355 @@
+01819964328
+
+302
+
+SELECT     ID, CUSTOMERNO, CUSTNAME, FIRSTNAME, LASTNAME, DOB, PHONENO, MOBILENO, EMAIL, MOTHERSNAME, FATHERSNAME, SPOUSENAME, GENDER, 
+                      NATIONALID, BIRTHREGNO, TINNO, PASSWPORTNO, LOCALADDRESS, ADDRESS, VILLAGE, THANA, DISTRICT, DIVISION, POSTOFFICE, OCCUPATION, COUNTRY, 
+                      NATIONALITY, BRANCHCODE, CREATEDON, CREATEDBY, ISACTIVE, FIRSTNAME1, LASTNAME1
+FROM         OBLACCOUNTHOLDER
+WHERE     (CUSTOMERNO IN ('000011401', '000095755', '000100672', '000102387', '000166483', '002090460', '006181117', '006185356', '010051287', '012082163', 
+                      '013105789', '016140005', '017150601', '017152979', '017154943', '025213574', '027234030', '044400195', '046420751'))
+ORDER BY CUSTOMERNO
+
+10.20.30.32
+
+nusrat
+01726946109
+
+8679399718
+Imamgomj
+01819231094
+
+01798101077
+
+0081020002296
+
+109327101.90
+122039101.10
+
+0500460960002
+
+0501020002121
+
+
+select trn_dt, ac_no from obllive.acvw_all_ac_entries where MODULE='RT' and trn_code in ('193','180','189','052','182','192','188','175','001', '002', '003') " +
+                            " and  drcr_ind = '' and cust_gl='A' " +
+                            "and to_char(TRN_DT,'yyyymmdd') between '' and '' " +
+                            "group by ac_no,trn_dt having sum(lcy_amount) >= 1000000 
+
+
+            string strcmd = "select ace.ac_no, " +
+       " ace.TRN_REF_NO Transaction_No, " +
+       " ace.VALUE_DT Transaction_Date, " +
+       " trn.trn_desc Transaction_Mode, " +
+       " case when ace.MODULE='RT' and ace.trn_code in ('001', '002', '003') and ace.USER_ID not in ('FCATOP','FLEXSWITCH') then 'In-Branch'" +
+       "     when ace.USER_ID='FLEXSWITCH' then 'ATM' end Transaction_Type," +
+       " ace.LCY_AMOUNT amount, " +
+       " ace.AC_BRANCH Transaction_Location, " +
+       " ace.AC_ENTRY_SR_NO, " +
+       " ace.ENTRY_SEQ_NO Internal_Reference_no, " +
+       " ace.TRN_DT Date_Posting, " +
+       " br.branch_name || '-' || su.home_branch Transaction_Location " +
+       " from obllive.acvw_all_ac_entries ace, " +
+       " obllive.sttm_cust_account   cust, " +
+       " obllive.smtb_user           su, " +
+       " obllive.sttm_branch         br, " +
+       " obllive.sttm_trn_code       trn " +
+       " where cust.cust_ac_no = ace.ac_no " +
+   " and trn.trn_code = ace.trn_code " +
+   " and ace.user_id = su.user_id " +
+   " and ace.MODULE='RT' " +
+   " and ace.trn_code in ('193','180','189','052','182','192','188','175','001', '002', '003')" +
+   " and br.branch_code = su.home_branch " +
+   " and to_char(ace.TRN_DT, 'yyyymmdd') between    '" + dtFrom.Date.ToString("yyyyMMdd") + "' and '" + dtTo.Date.ToString("yyyyMMdd") + "' " +
+   " and ace.ac_no =" + strAcno +
+   " and ace.DRCR_IND='" + DRCR + "'"+
+   " order by ace.ac_no, ace.AC_ENTRY_SR_NO  " ;
+
+
+INSERTED TABLE NAME : address -> TOTAL INSERTED : 8332.
+INSERTED TABLE NAME : addressList -> TOTAL INSERTED : 4017.
+INSERTED TABLE NAME : aka -> TOTAL INSERTED : 8782.
+INSERTED TABLE NAME : akaList -> TOTAL INSERTED : 2767.
+INSERTED TABLE NAME : citizenship -> TOTAL INSERTED : 693.
+INSERTED TABLE NAME : citizenshipList -> TOTAL INSERTED : 653.
+INSERTED TABLE NAME : dateOfBirthItem -> TOTAL INSERTED : 3061.
+INSERTED TABLE NAME : dateOfBirthList -> TOTAL INSERTED : 2570.
+INSERTED TABLE NAME : id -> TOTAL INSERTED : 5853.
+INSERTED TABLE NAME : idList -> TOTAL INSERTED : 3521.
+INSERTED TABLE NAME : nationality -> TOTAL INSERTED : 942.
+INSERTED TABLE NAME : nationalityList -> TOTAL INSERTED : 917.
+INSERTED TABLE NAME : placeOfBirthItem -> TOTAL INSERTED : 2019.
+INSERTED TABLE NAME : placeOfBirthList -> TOTAL INSERTED : 1879.
+INSERTED TABLE NAME : program -> TOTAL INSERTED : 6674.
+INSERTED TABLE NAME : programList -> TOTAL INSERTED : 5892.
+INSERTED TABLE NAME : publshInformation -> TOTAL INSERTED : 1.
+INSERTED TABLE NAME : sdnEntry -> TOTAL INSERTED : 5892.
+INSERTED TABLE NAME : vesselInfo -> TOTAL INSERTED : 264.
+TOTAL TABLE INSERTED : 19 & TOTAL DATA INSERTED : 64729
+
+
+
+INSERTED TABLE NAME : CONSOLIDATED_LIST -> TOTAL INSERTED : 1.
+INSERTED TABLE NAME : DESIGNATION -> TOTAL INSERTED : 220.
+INSERTED TABLE NAME : ENTITIES -> TOTAL INSERTED : 1.
+INSERTED TABLE NAME : ENTITY -> TOTAL INSERTED : 422.
+INSERTED TABLE NAME : ENTITY_ADDRESS -> TOTAL INSERTED : 622.
+INSERTED TABLE NAME : ENTITY_ALIAS -> TOTAL INSERTED : 774.
+INSERTED TABLE NAME : INDIVIDUAL -> TOTAL INSERTED : 621.
+INSERTED TABLE NAME : INDIVIDUAL_ADDRESS -> TOTAL INSERTED : 675.
+INSERTED TABLE NAME : INDIVIDUAL_ALIAS -> TOTAL INSERTED : 1933.
+INSERTED TABLE NAME : INDIVIDUAL_DATE_OF_BIRTH -> TOTAL INSERTED : 777.
+INSERTED TABLE NAME : INDIVIDUAL_DOCUMENT -> TOTAL INSERTED : 668.
+INSERTED TABLE NAME : INDIVIDUAL_PLACE_OF_BIRTH -> TOTAL INSERTED : 704.
+INSERTED TABLE NAME : INDIVIDUALS -> TOTAL INSERTED : 1.
+INSERTED TABLE NAME : LAST_DAY_UPDATED -> TOTAL INSERTED : 404.
+INSERTED TABLE NAME : LIST_TYPE -> TOTAL INSERTED : 866.
+INSERTED TABLE NAME : NATIONALITYUNS -> TOTAL INSERTED : 503.
+INSERTED TABLE NAME : TITLE -> TOTAL INSERTED : 141.
+INSERTED TABLE NAME : VALUE -> TOTAL INSERTED : 2116.
+TOTAL TABLE INSERTED : 18 & TOTAL DATA INSERTED : 11449
+
+
+
+User Name: e-gp_2@onebank.com.bd
+Password: egpOBL062
+
+919
+952
+
+108
+17675338
+
+Employee id : 060420538
+ext: 231
+contact: 01556305781
+
+
+a/c : 0182050000681
+userid: fazlulhuq
+
+hazi
+alhaz
+professor
+dr
+engineer
+engr
+late
+Mr
+Mrs
+Miss
+Major
+retd
+ M/S
+
+
+GOAML JULY 2014
+Cause: Individual Account isactive=0
+Account Info: Bogra Branch-0190151231004
+
+
+Kawranbazar Branch-0121020001749
+
+Mirpur 
+
+Shamim 01719379181
+
+????? ? ? ????? ?? ???? ??? ??? ?????? Have to work on their user authentication.
+
+################################################
+Date: 02/09/2014
+1.
+
+Contact Person: Ripon (FD)
+TO: Tandra Apu
+Cause: Root offline file isn't uploaded. It's emergency and early to do.
+
+
+////////////////////////////////
+HEAD OF DEPT
+AHMAD TASHBIR CHOWDHURY
+014000202579
+glOry#2014
+
+
+SUPER ADMIN
+990350035
+990350035
+
+Agrabad
+000420104
+123456
+2.
+
+
+##Set Identity in mssql
+DBCC CHECKIDENT ([TableName], reseed, [Set Number])
+
+http://tranish.blogspot.com/2013/04/the-iron-giant-1999-brrip-720p-675mb_3.html
+050920479
+Dear Sir,
+
+Web statement have been activated as well as the credential send to the clients through  e-mail. 
+
+Thanks & Regards,
+Md. Momenul Islam Bhuiyan | Junior Officer
+In-house Software Development Operation | Information Technology Division
+ONE Bank Limited | Corporate Head Quarter
+HRC Bhaban | 46 Kawranbazar C.A | Dhaka - 1215 | Bangladesh. Extension: 395
+
+
+1. poster color(sky blue, yellow, paste)
+2. picture print
+
+
+++++++++++++++++++++++++++
+
+To Tandra Apu
+
+mohsina
+458
+
+Delwar (FD) -> PF
+
++++++++++++++++++++++++++
+to tandra apu
+Zia HR
+455
+
+Ejaj HR vai
+460
+
+Nazmul islam Lanka Bangla Limited
+
+AMIN -> FD
+++++++++++++++++++++++++++++++++++++++
+Date: 21/10/2014
+
+1. OBL Passowrd Management System -> SRS, Test Case, User Manual
+2. OBL Online Web Statement Authentication System -> SRS, Test Case, User Manual
+3. OBL Appraisal Management System V2.0 -> Test Case
+4. OBL Report Authetication -> SRS, Test Case + Test, User Manual
+5. OBL CIB Automation -> Short Specification/Project Flow, Test Case , User Manual 
+
+++++++++++++++
+Afrin
+mobile: 01761755588
++++++++++++++++
+Amir vai -> Farah Apu
+
+Ibrahim : ac no: 0122010001716	+8801833324717-> 818
+
++++++++++++++++++++
+
+Riyat (IT): 01819821585
+
+++++++++++++++++
+rehana->tipu sultan branch
+140100338582
+
+Mujib vai-> 409
+Ejaj vai
+Rashed vai -> 843
+
+134914
+131267
+
+
+
+leave plan mendatory leave 
+
+
+ssc: 118921
+hsc: 121250
+
+01922429672- mishi
+470/2,south monipur, dhaka
+
+
+01819189721 -> wabaidur vai card division
+
+01797778043 -> 
+
+01712834184 -> atik
+++++++++++++++++++++++++++++++
+
+Tandra apu -> Risk Management, HR Tabassum
+
+++++++++++++++++++++++++++++++
+mehedi -> 01727587974
+
+Tandra apu -> mujib vai 409
+
+
+01715787621-sharmin
+
+01819842174-arif
+
++++++++++++++++++
+
+nippom(tipu sultan)
+01710765814
+Bill No:
+140100422735
+
+
+
+
+01611421124
+
+
+jogoonathpur
+01729090661
+
+MEHER Farzana
+01766667025
+
+kajol
+01819110511
+
+
+01726340265
+951
+
+Moziluzzaman
+01911892636
+
+302
+zahid
+470
+
+Ameresh
+01766158321
+012003802086 
+
+sayed
+01711903260
+
+azad
+01730319834
+
+shormin
+01718437674
+
+mozajahrul haq
+01711078553
+
+
+
+013015302423
+
+
+01199007711
+
+ashura
+01755506221
+
+
+Dear Sir,
+This is for your kind perusal that I am Ishtiaque Ahmed, Officer, ONE Bank Limited would like to visit ................ for personal ground.
+It will be highly appreciated if you please arrange to issue me a No Objection Certificate (NOC) for the purpose mentioned above including some information i,e Joining Date, Designation,  for obtaining Visa .
+Thank you for your kind cooperation.   
+Thanking you,
+
+
+Sincerely yours, 

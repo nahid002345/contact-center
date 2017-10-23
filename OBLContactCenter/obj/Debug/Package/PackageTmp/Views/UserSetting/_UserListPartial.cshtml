@@ -1,0 +1,55 @@
+﻿@model List<OBLContactCenter.EFnClass.CCUSER>
+<div id="gridList">
+    <div class="portlet box green">
+        @*<div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-users"></i>System User List
+            </div>
+        </div>*@
+        <div class="portlet-body flip-scroll">
+            @if (Model != null)
+            {
+                var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "gridList");
+                //grid.PagerList(WebGridPagerModes.All, paginationStyle: "Pagination");
+
+
+                @grid.Table(
+             tableStyle: "table table-bordered table-striped table-condensed flip-content",
+             headerStyle: "flip-content",
+
+             columns: new[]{
+               grid.Column("ID",header: "ID"),
+               grid.Column("USERID",header: "User ID/Employee ID"),
+               grid.Column("EMPLOYEENAME",header: "Name"),
+               grid.Column("EMAIL",header: "Email"),
+               grid.Column("CCROLE.ROLENAME",header: "User Role"),
+               grid.Column("CCGROUP.GROUPNAME",header: "Group"),
+
+               grid.Column("ISACTIVE", "Status",format: (item) => (item.ISACTIVE) ? Html.Raw("<span class='fa fa-check-square-o'></span>") :
+                                                                                        Html.Raw("<span class='fa fa-times'></span>")),
+
+                                                                                        @*grid.Column(header:"Status", format: (item) => (bool) item.ISACTIVE == true ?  @<span class="fa fa-check-square-o"></span> : @<i class="fafa-times"></i>),*@
+                grid.Column("", "Action", format: @<button class="btn red editItem" data-id="@item.ID" data-url="@Url.Action("EditUser", "UserSetting")">Edit <i class="fa fa-edit"></i></button>)
+            @*grid.Column("", "Edit", format: @<a class="btn red editItem" href="@Url.Action("Edit", "UserSetting" , new { id = item.id})">Edit <i class="fa fa-edit"></i></a>)*@
+                }
+                     );
+                <div class="row">
+                    <div class="col-sm-6">
+                        @grid.PagerList(mode: WebGridPagerModes.All, paginationStyle: "pagination")
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="note note-warning">
+                    <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

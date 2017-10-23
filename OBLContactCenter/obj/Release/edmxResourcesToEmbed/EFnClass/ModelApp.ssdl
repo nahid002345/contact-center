@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelAppDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelAppDBModelStoreContainer">
+    <EntitySet Name="SysMenu" EntityType="ModelAppDBModel.Store.SysMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SysMenuRoleAssign" EntityType="ModelAppDBModel.Store.SysMenuRoleAssign" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SysRoleInfo" EntityType="ModelAppDBModel.Store.SysRoleInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SysSubMenu" EntityType="ModelAppDBModel.Store.SysSubMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SysUserInfo" EntityType="ModelAppDBModel.Store.SysUserInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SysUserRoleAssign" EntityType="ModelAppDBModel.Store.SysUserRoleAssign" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_SysMenuRoleAssign_SysMenu" Association="ModelAppDBModel.Store.FK_SysMenuRoleAssign_SysMenu">
+      <End Role="SysMenu" EntitySet="SysMenu" />
+      <End Role="SysMenuRoleAssign" EntitySet="SysMenuRoleAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysMenuRoleAssign_SysRoleInfo" Association="ModelAppDBModel.Store.FK_SysMenuRoleAssign_SysRoleInfo">
+      <End Role="SysRoleInfo" EntitySet="SysRoleInfo" />
+      <End Role="SysMenuRoleAssign" EntitySet="SysMenuRoleAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysSubMenu_SysMenu" Association="ModelAppDBModel.Store.FK_SysSubMenu_SysMenu">
+      <End Role="SysMenu" EntitySet="SysMenu" />
+      <End Role="SysSubMenu" EntitySet="SysSubMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserRoleAssign_SysRoleInfo" Association="ModelAppDBModel.Store.FK_SysUserRoleAssign_SysRoleInfo">
+      <End Role="SysRoleInfo" EntitySet="SysRoleInfo" />
+      <End Role="SysUserRoleAssign" EntitySet="SysUserRoleAssign" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserRoleAssign_SysUserInfo" Association="ModelAppDBModel.Store.FK_SysUserRoleAssign_SysUserInfo">
+      <End Role="SysUserInfo" EntitySet="SysUserInfo" />
+      <End Role="SysUserRoleAssign" EntitySet="SysUserRoleAssign" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SysMenu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MenuName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsParent" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="UpdateOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysMenuRoleAssign">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MenuId" Type="bigint" Nullable="false" />
+    <Property Name="RoleId" Type="bigint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SysRoleInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="UpdatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysSubMenu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="ParentMenuId" Type="bigint" Nullable="false" />
+    <Property Name="SubMenuName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="SMController" Type="nvarchar" MaxLength="50" />
+    <Property Name="SMAction" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="UpdatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysUserInfo">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="20" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysUserRoleAssign">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="RoleId" Type="bigint" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SetDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK_SysMenuRoleAssign_SysMenu">
+    <End Role="SysMenu" Type="ModelAppDBModel.Store.SysMenu" Multiplicity="1" />
+    <End Role="SysMenuRoleAssign" Type="ModelAppDBModel.Store.SysMenuRoleAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysMenu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysMenuRoleAssign">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysMenuRoleAssign_SysRoleInfo">
+    <End Role="SysRoleInfo" Type="ModelAppDBModel.Store.SysRoleInfo" Multiplicity="1" />
+    <End Role="SysMenuRoleAssign" Type="ModelAppDBModel.Store.SysMenuRoleAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysMenuRoleAssign">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysSubMenu_SysMenu">
+    <End Role="SysMenu" Type="ModelAppDBModel.Store.SysMenu" Multiplicity="1" />
+    <End Role="SysSubMenu" Type="ModelAppDBModel.Store.SysSubMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysMenu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysSubMenu">
+        <PropertyRef Name="ParentMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserRoleAssign_SysRoleInfo">
+    <End Role="SysRoleInfo" Type="ModelAppDBModel.Store.SysRoleInfo" Multiplicity="1" />
+    <End Role="SysUserRoleAssign" Type="ModelAppDBModel.Store.SysUserRoleAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRoleInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SysUserRoleAssign">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserRoleAssign_SysUserInfo">
+    <End Role="SysUserInfo" Type="ModelAppDBModel.Store.SysUserInfo" Multiplicity="1" />
+    <End Role="SysUserRoleAssign" Type="ModelAppDBModel.Store.SysUserRoleAssign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUserInfo">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SysUserRoleAssign">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

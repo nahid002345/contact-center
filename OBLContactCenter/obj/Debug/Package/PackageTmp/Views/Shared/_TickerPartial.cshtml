@@ -1,0 +1,21 @@
+﻿@model OBLContactCenter.Models.Dashboard
+<link href="~/Content/liScroll.css" rel="stylesheet" />
+<script src="~/Scripts/liScroll.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("ul#tickerNews").liScroll();
+    });
+</script>
+
+@if (Model.NewsTicker != null)
+{
+    <div class="note note-danger">
+        <ul id="tickerNews" style="font-size: 16px;">
+            @foreach (var item in Model.NewsTicker)
+            {
+                <li><span> :: </span> <b>@item.NAME</b> :  @item.VALUE <span class="fa fa-calendar"></span>@item.CREATEDON <span> :: </span></li> 
+            }
+        </ul>
+    </div>
+}

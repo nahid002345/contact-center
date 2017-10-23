@@ -1,0 +1,614 @@
+﻿<script src="~/Scripts/CustomeJS/chart/amChart/amcharts.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/funnel.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/gauge.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/pie.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/radar.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/serial.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/xy.js"></script>
+
+<script src="~/Scripts/CustomeJS/chart/amChart/theme/black.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/theme/chalk.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/theme/dark.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/theme/light.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/theme/patterns.js"></script>
+
+
+<script src="~/Scripts/CustomeJS/chart/amChart/export/amexport.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/export/canvg.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/export/filesaver.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/export/jspdf.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/export/jspdf.plugin.addimage.js"></script>
+<script src="~/Scripts/CustomeJS/chart/amChart/export/rgbcolor.js"></script>
+
+<script type="text/javascript">
+    function loadPieChart(chartData) {
+
+        var chart = AmCharts.makeChart("chartdiv", {
+            "type": "pie",
+            "titleField": "ActionName",
+            "valueField": "ActionMemoCount",
+            "theme": "light",
+            "pathToImages": "amcharts/amcharts/images/",
+            "autoMargins": false,
+            "marginLeft": 30,
+            "marginRight": 8,
+            "marginTop": 10,
+            "marginBottom": 26,
+
+            "fontFamily": 'Open Sans',
+            "color": '#888',
+            "dataProvider": chartData,
+
+            "valueAxes": [{
+                "axisAlpha": 0,
+                "position": "left"
+            }],
+            "startDuration": 1,
+        });
+    }
+
+    function load3dDonutChart(chartData) {
+
+        var chart = AmCharts.makeChart("chartdiv", {
+            "type": "pie",
+            "theme": "light",
+            "dataProvider": chartData,
+            "valueField": "ActionMemoCount",
+            "titleField": "ActionName",
+            "startEffect": "elastic",
+            "startDuration": 2,
+            "labelRadius": 15,
+            "innerRadius": "50%",
+            "depth3D": 10,
+            "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+            "angle": 15,
+            "exportConfig": {
+                menuRight: '20px',
+                menuBottom: '30px',
+                menuItems: [{
+                    icon: 'http://www.amcharts.com/lib/3/images/export.png',
+                    format: 'pdf',
+                    enabled: false
+                }]
+            }
+        });
+    }
+
+    function loadColumnChart(chartData) {
+        var chart = AmCharts.makeChart("columnChartdiv", {
+            "type": "serial",
+            "theme": "light",
+            "dataProvider": chartData,
+            "valueAxes": [{
+                "gridColor": "#FFFFFF",
+                "gridAlpha": 0.2,
+                "dashLength": 0
+            }],
+            "gridAboveGraphs": true,
+            "startDuration": 1,
+            "graphs": [{
+                "balloonText": "[[category]]: <b>[[value]]</b>",
+                "fillAlphas": 0.8,
+                "lineAlpha": 0.2,
+                "type": "column",
+                "valueField": "count"
+            }],
+            "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+            },
+            "categoryField": "date",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "gridAlpha": 0,
+                "tickPosition": "start",
+                "tickLength": 10,
+                "labelRotation": 60
+            },
+            "exportConfig": {
+                menuRight: '20px',
+                menuBottom: '30px',
+                menuItems: [{
+                    icon: 'http://www.amcharts.com/lib/3/images/export.png',
+                    format: 'pdf',
+                    enabled: false
+                }]
+            }
+
+        });
+    }
+
+    function loadStackedBarChart(chartData) {
+        var chart = AmCharts.makeChart("colUwiseActivitydiv", {
+            "type": "serial",
+            "theme": "light",
+            "legend": {
+                "horizontalGap": 10,
+                "maxColumns": 1,
+                "position": "right",
+                "useGraphSettings": true,
+                "markerSize": 10
+            },
+            "dataProvider":chartData,
+            "graphs": [{
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "FTR",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "ftr"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Open",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Open"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "On Process",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "OnProcess"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Required",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackRequired"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Done",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackDone"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Mail Sent",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "MailSent"
+            }],
+            "rotate": false,
+            "categoryField": "UserName",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "position": "left"
+            },
+            "exportConfig": {
+                menuRight: '20px',
+                menuBottom: '30px',
+                menuItems: [{
+                    icon: 'http://www.amcharts.com/lib/3/images/export.png',
+                    format: 'pdf',
+                    enabled: false
+                }]
+            }
+        });
+    }
+
+    function horizStackBar(chartData) {
+        var chart = AmCharts.makeChart("colUwiseActivitydiv", {
+            "type": "serial",
+            "theme": "light",
+            "legend": {
+                "autoMargins": false,
+                "borderAlpha": 0.2,
+                "equalWidths": false,
+                "horizontalGap": 10,
+                "markerSize": 10,
+                "useGraphSettings": true,
+                "valueAlign": "left",
+                "valueWidth": 0
+            },
+            "dataProvider": chartData,
+            "valueAxes": [{
+                "stackType": "100%",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "labelsEnabled": false,
+                "position": "left"
+            }],
+            "graphs": [{
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "FTR",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "ftr"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Open",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Open"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "On Process",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "OnProcess"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Required",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackRequired"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Done",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackDone"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Mail Sent",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "MailSent"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Refer",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Refer"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Resolve",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Resolve"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Reached",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallReached"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Unreached",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallUnreached"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Follow Up",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "FollowUp"
+            }],
+            "marginTop": 30,
+            "marginRight": 0,
+            "marginLeft": 0,
+            "marginBottom": 40,
+            "autoMargins": false,
+            "categoryField": "UserName",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "labelRotation": 60
+            },
+            "exportConfig": {
+                menuRight: '20px',
+                menuBottom: '30px',
+                menuItems: [{
+                    icon: 'http://www.amcharts.com/lib/3/images/export.png',
+                    format: 'pdf',
+                    enabled: false
+                }]
+            }
+
+        });
+    }
+
+    function horiz3DStackBar(chartData) {
+        var chart = AmCharts.makeChart("colUwiseActivitydiv", {
+            "type": "serial",
+            "theme": "light",
+            "depth3D": 20,
+            "angle": 30,
+            "legend": {
+                "horizontalGap": 10,
+                "useGraphSettings": true,
+                "markerSize": 10
+            },
+            "dataProvider": chartData,
+            "valueAxes": [{
+                "stackType": "regular",
+                "axisAlpha": 0,
+                "gridAlpha": 0
+            }],
+            "graphs": [{
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "FTR",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "ftr"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Open",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Open"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "On Process",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "OnProcess"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Required",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackRequired"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Back Done",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallBackDone"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Mail Sent",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "MailSent"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Refer",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Refer"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Resolve",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "Resolve"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Reached",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallReached"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Call Unreached",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "CallUnreached"
+            }, {
+                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                "fillAlphas": 0.8,
+                "labelText": "[[value]]",
+                "lineAlpha": 0.3,
+                "title": "Follow Up",
+                "type": "column",
+                "color": "#000000",
+                "valueField": "FollowUp"
+            }],
+            "marginTop": 30,
+            "marginRight": 0,
+            "marginLeft": 0,
+            "marginBottom": 40,
+            "autoMargins": false,
+            "categoryField": "UserName",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "position": "left",
+                "labelRotation": 90
+            },
+            "exportConfig": {
+                menuRight: '20px',
+                menuBottom: '30px',
+                menuItems: [{
+                    icon: 'http://www.amcharts.com/lib/3/images/export.png',
+                    format: 'pdf',
+                    enabled: false
+                }]
+            }
+
+        });
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "@Url.Action("GetStatusCount", "Home")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chartData) {
+                load3dDonutChart(chartData);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+
+        });
+
+        $.ajax({
+            url: "@Url.Action("GetDailyRequestCount", "Home")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chartData) {
+                loadColumnChart(chartData);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+
+        });
+
+        $.ajax({
+            url: "@Url.Action("GetUserwiseTicketStatus", "Home")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (chartData) {
+                horiz3DStackBar(chartData);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+
+        });
+
+    });
+
+</script>
+<div class="row" style="margin: 0%;">
+    <div class="col-md-6 col-sm-6">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-green-sharp hide"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase">Memo by Action </span>
+                    <span class="caption-helper">in percentage(%)</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @*<div id="site_statistics_loading">
+                        <img src="~/Content/CustomeTheme/img/loading.gif" />
+                    </div>*@
+                <div id="site_statistics_content">
+                    <div id="chartdiv" class="chart">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-red-sunglo hide"></i>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Daily Memo Request</span>
+                    <span class="caption-helper">daily stats...</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @*<div id="site_activities_loading">
+                        <img src="~/Content/CustomeTheme/img/loading.gif" />
+                    </div>*@
+                <div id="site_activities_content">
+                    <div id="columnChartdiv" style="height: 300px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+
+</div>
+
+
+<div class="row" style="margin: 0%;">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-red-sunglo hide"></i>
+                    <span class="caption-subject font-red-sunglo bold uppercase">User wise Ticket Status</span>
+                    <span class="caption-helper">daily stats...</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @*<div id="site_activities_loading">
+                        <img src="~/Content/CustomeTheme/img/loading.gif" />
+                    </div>*@
+                <div id="site_activities_content">
+                    <div id="colUwiseActivitydiv" style="height: 600px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>

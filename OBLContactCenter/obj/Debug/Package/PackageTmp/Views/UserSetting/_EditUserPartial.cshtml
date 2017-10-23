@@ -1,0 +1,168 @@
+﻿@model OBLContactCenter.EFnClass.CCUSER
+<script type="text/javascript">
+
+    $("#chkIsActive").bootstrapSwitch();
+
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+
+
+    $(document).ready(function () {
+        $("#ctrlImage").fileinput({
+            previewFileType: "image",
+            browseClass: "btn btn-success",
+            showUpload: false,
+            browseLabel: "Pick Image",
+            browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+            removeClass: "btn btn-danger",
+            removeLabel: "Delete",
+            removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+            allowedFileExtensions: ["jpg", "gif", "png"],
+        });
+    });
+
+</script>
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-user"></i>User Information
+            </div>
+        </div>
+        <div class="portlet-body">
+            @using (Html.BeginForm("InsertEditUser", "UserSetting", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-body col-md-9">
+                    <div id="hdnDiv" style="display: none;">
+                        @Html.HiddenFor(m => m.ID);
+                        
+                        @Html.HiddenFor(m => m.CREATEDBY);
+                        @Html.HiddenFor(m => m.CREATEDON);
+                        @Html.HiddenFor(m => m.MODIFIEDBY);
+                        @Html.HiddenFor(m => m.MODIFIEDON);
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">User ID</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.USERID, new { @class = "form-control", placeholder = "Enter Employee ID/ User ID" })
+                            @*<input type="text" class="form-control" placeholder="Enter Employee ID/ User ID">*@
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.USERID, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">User Name</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.EMPLOYEENAME, new { @class = "form-control", placeholder = "Enter User Name" })
+                            @*<input type="text" class="form-control" placeholder="Enter Employee ID/ User ID">*@
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.EMPLOYEENAME, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Password</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @if (Model.ID == 0)
+                                {
+                                    @Html.PasswordFor(m => m.USERPASSWORD, new { @class = "form-control", placeholder = "Password" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(m => m.USERPASSWORD, new { @class = "form-control", placeholder = "Password", @type = "password" })
+                                }
+                                <span class="input-group-addon">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.USERPASSWORD, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email Address</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.EMAIL, new { @class = "form-control", placeholder = "Email Address" })
+                                @*<input type="email" class="form-control" placeholder="Email Address">*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Group</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.GROUPID, (IEnumerable<SelectListItem>)ViewBag.GroupList, "Select Group", new { @class = "form-control" })
+
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.GROUPID, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Role</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.EMPLOYEEROLEID, (IEnumerable<SelectListItem>)ViewBag.RoleList, "Select User Role", new { @class = "form-control" })
+
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.EMPLOYEEROLEID, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Is Active ?</label>
+                        <div class="col-md-4">
+                            @*<input type="checkbox" name="my-checkbox" id="chkbx" checked>*@
+                            @Html.CheckBoxFor(m => m.ISACTIVE, new { @name = "chkIsActive", id = "chkIsActive" })
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-body col-md-3">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Profile Picture</h3>
+                        </div>
+                        <div class="panel-body">
+                            @if (string.IsNullOrEmpty(Model.IMAGEPATH))
+                            {
+                                <img src="~/Content/img/avatar.png" alt="new" class="img-responsive"  />
+                            }
+                            else
+                            {
+                                <img src="~/Content/UserImage/@Model.IMAGEPATH" alt="new" class="img-responsive" />
+                            }
+                            <div class="form-group">
+                                <input id="ctrlImage" name="ctrlImage" type="file" class="file-loading" data-preview-file-type="any" accept="image/*" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            @if (Model.ID == 0)
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="create" id="createBtn">Create</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="update" id="updateBtn">Update</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

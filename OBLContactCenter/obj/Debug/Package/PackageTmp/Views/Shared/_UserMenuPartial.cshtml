@@ -1,0 +1,20 @@
+﻿@model List<CCROLEMENU>
+
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+        <li class="sidebar-toggler-wrapper">
+
+            <div class="sidebar-toggler">
+
+            </div>
+
+        </li>
+        @foreach (var item in Model)
+        {
+            @Html.ParentMenuItem(item.CCMENU.NAME, item.CCMENU.CCMENU1.OrderBy(t => t.ORDERNO).ToList(), iconClass: item.CCMENU.ICONTEXT);
+        }
+
+    </ul>
+
+</div>

@@ -1,0 +1,88 @@
+﻿@model OBLContactCenter.EFnClass.CCCALLTYPE
+<script type="text/javascript">
+
+    
+    $("#chkIsActive").bootstrapSwitch();
+
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+
+</script>
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Call Type Information
+            </div>
+
+        </div>
+        <div class="portlet-body">
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("InsertEditType", "CallCatTypeSetting", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-body">
+                    <div id="hdnDiv" style="display: none;">
+                        @Html.HiddenFor(m => m.ID);
+                        
+                        @Html.HiddenFor(m => m.CREATEDBY);
+                        @Html.HiddenFor(m => m.CREATEDON);
+                        @Html.HiddenFor(m => m.MODIFIEDBY);
+                        @Html.HiddenFor(m => m.MODIFIEDON);
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Catagory Name</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.TYPENAME, new { @class = "form-control", placeholder = "Enter Call Type Name" })
+                            
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.TYPENAME, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Group</label>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.CATAGORYID, (IEnumerable<SelectListItem>)ViewBag.CatList, "Select Call Catagory", new { @class = "form-control" })
+
+                        </div>
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.CATAGORYID, null, new { @class = "alert alert-danger display" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Remarks</label>
+                        <div class="col-md-4">
+                            @Html.TextAreaFor(m => m.REMARKS, new { @class = "form-control"})
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Is Active ?</label>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(m => m.ISACTIVE, new { @name = "chkIsActive", id = "chkIsActive" })
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            @if (Model.ID == 0)
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="create" id="createBtn">Create</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn green" name="btnName" value="update" id="updateBtn">Update</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

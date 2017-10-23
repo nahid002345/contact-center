@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OBLCONTACTCENTERModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CCACTIONGROUPMAP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ACTIONID" Type="bigint" Nullable="false" />
+    <Property Name="ROLEID" Type="bigint" Nullable="false" />
+    <Property Name="MEMOTYPEID" Type="bigint" Nullable="false" />
+    <Property Name="ASGNGROUPID" Type="bigint" />
+    <Property Name="ISACTIVE" Type="bit" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CCACTIONMAP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ACTIONID" Type="bigint" Nullable="false" />
+    <Property Name="ROLEID" Type="bigint" />
+    <Property Name="MEMOTYPEID" Type="bigint" />
+    <Property Name="ISACTIVE" Type="bit" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CCCALLCATAGORY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="REMARKS" Type="nvarchar" MaxLength="100" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCCALLTYPE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATAGORYID" Type="bigint" Nullable="false" />
+    <Property Name="TYPENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="REMARKS" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCENUMERATION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TYPE" Type="int" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="VALUE" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NAMEVALUE" Type="nvarchar" MaxLength="152" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="20" />
+    <Property Name="CREATEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCEVENTLOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RequestTime" Type="datetime" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+    <Property Name="Controller" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Action" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="EventType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EventName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CCGROUP">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GROUPNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="REMARKS" Type="nvarchar(max)" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCMEMOATTACHMENT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MEMOMASTERID" Type="bigint" Nullable="false" />
+    <Property Name="FILENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FILEPATH" Type="nvarchar(max)" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CCMEMOLOG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MEMOMASTERID" Type="bigint" Nullable="false" />
+    <Property Name="ASSIGNGROUP" Type="bigint" Nullable="false" />
+    <Property Name="ACTIONDETAILS" Type="nvarchar(max)" />
+    <Property Name="ACTIONTYPE" Type="bigint" Nullable="false" />
+    <Property Name="ACTEDBY" Type="bigint" />
+    <Property Name="REMARKS" Type="nchar" MaxLength="10" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CCMEMOMASTER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MEMOTYPE" Type="bigint" Nullable="false" />
+    <Property Name="TICKETNO" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CUSTOMERNAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="CUSTOMERCONTACT" Type="nvarchar" MaxLength="50" />
+    <Property Name="CUSTENTITYTYPE" Type="int" />
+    <Property Name="CUSTACNO" Type="nvarchar" MaxLength="20" />
+    <Property Name="CUSTCARDNO" Type="nvarchar" MaxLength="20" />
+    <Property Name="REQUESTDETAILS" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CALLCATEGORY" Type="bigint" Nullable="false" />
+    <Property Name="CALLTYPE" Type="bigint" Nullable="false" />
+    <Property Name="SOURCETYPE" Type="bigint" Nullable="false" />
+    <Property Name="PRODUCTTYPE" Type="bigint" Nullable="false" />
+    <Property Name="PRIORITY" Type="bigint" Nullable="false" />
+    <Property Name="ASSIGNGROUP" Type="bigint" />
+    <Property Name="LASTACTIONTYPE" Type="bigint" />
+    <Property Name="LASTACTIONDETAILS" Type="nvarchar(max)" />
+    <Property Name="ISOPEN" Type="bit" Nullable="false" />
+    <Property Name="REMARKS" Type="nchar" MaxLength="10" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCMENU">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ACTION" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONTROLLER" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISPARENT" Type="bit" />
+    <Property Name="PARENTID" Type="bigint" />
+    <Property Name="ORDERNO" Type="int" />
+    <Property Name="ICONTEXT" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CCROLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ROLENAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ISADMIN" Type="bit" Nullable="false" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CCROLEMENU">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ROLEID" Type="bigint" Nullable="false" />
+    <Property Name="MENUID" Type="bigint" Nullable="false" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CCUSER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USERID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="USERPASSWORD" Type="nvarchar" MaxLength="200" />
+    <Property Name="EMPLOYEEID" Type="nvarchar" MaxLength="20" />
+    <Property Name="EMPLOYEENAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="EMPLOYEEROLEID" Type="bigint" Nullable="false" />
+    <Property Name="GROUPID" Type="bigint" />
+    <Property Name="IMAGEPATH" Type="nvarchar(max)" />
+    <Property Name="ISACTIVE" Type="bit" Nullable="false" />
+    <Property Name="CREATEDBY" Type="bigint" Nullable="false" />
+    <Property Name="CREATEDON" Type="datetime" Nullable="false" />
+    <Property Name="MODIFIEDBY" Type="bigint" />
+    <Property Name="MODIFIEDON" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'OBLCONTACTCENTER.dbo.TblAudit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TblAudit">
+    <Key>
+      <PropertyRef Name="AuditID" />
+    </Key>
+    <Property Name="AuditID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="char" MaxLength="1" />
+    <Property Name="TableName" Type="varchar" MaxLength="128" />
+    <Property Name="PrimaryKeyField" Type="varchar" MaxLength="1000" />
+    <Property Name="PrimaryKeyValue" Type="varchar" MaxLength="1000" />
+    <Property Name="FieldName" Type="varchar" MaxLength="128" />
+    <Property Name="OldValue" Type="varchar" MaxLength="1000" />
+    <Property Name="NewValue" Type="varchar" MaxLength="1000" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="UserName" Type="varchar" MaxLength="128" />
+  </EntityType>
+  <Association Name="FK_CCACTIONGROUPMAP_CCACTIONENUMERATION">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCACTIONGROUPMAP" Type="Self.CCACTIONGROUPMAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCACTIONGROUPMAP">
+        <PropertyRef Name="ACTIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCACTIONGROUPMAP_CCGROUP">
+    <End Role="CCGROUP" Type="Self.CCGROUP" Multiplicity="0..1" />
+    <End Role="CCACTIONGROUPMAP" Type="Self.CCACTIONGROUPMAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCACTIONGROUPMAP">
+        <PropertyRef Name="ASGNGROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCACTIONGROUPMAP_CCROLE">
+    <End Role="CCROLE" Type="Self.CCROLE" Multiplicity="1" />
+    <End Role="CCACTIONGROUPMAP" Type="Self.CCACTIONGROUPMAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCACTIONGROUPMAP">
+        <PropertyRef Name="ROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCACTIONMAP_CCACTIONENUMERATION">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCACTIONMAP" Type="Self.CCACTIONMAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCACTIONMAP">
+        <PropertyRef Name="ACTIONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCACTIONMAP_CCROLE">
+    <End Role="CCROLE" Type="Self.CCROLE" Multiplicity="0..1" />
+    <End Role="CCACTIONMAP" Type="Self.CCACTIONMAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCACTIONMAP">
+        <PropertyRef Name="ROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCCALLTYPE_CCCALLCATAGORY">
+    <End Role="CCCALLCATAGORY" Type="Self.CCCALLCATAGORY" Multiplicity="1" />
+    <End Role="CCCALLTYPE" Type="Self.CCCALLTYPE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCCALLCATAGORY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCCALLTYPE">
+        <PropertyRef Name="CATAGORYID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOATTACHMENT_CCMEMOMASTER">
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="1" />
+    <End Role="CCMEMOATTACHMENT" Type="Self.CCMEMOATTACHMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCMEMOMASTER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOATTACHMENT">
+        <PropertyRef Name="MEMOMASTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOATTACHMENT_CCUSER">
+    <End Role="CCUSER" Type="Self.CCUSER" Multiplicity="1" />
+    <End Role="CCMEMOATTACHMENT" Type="Self.CCMEMOATTACHMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCUSER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOATTACHMENT">
+        <PropertyRef Name="CREATEDBY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOLOG_CCENUMERATION">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCMEMOLOG" Type="Self.CCMEMOLOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOLOG">
+        <PropertyRef Name="ACTIONTYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOLOG_CCMEMOLOG">
+    <End Role="CCGROUP" Type="Self.CCGROUP" Multiplicity="1" />
+    <End Role="CCMEMOLOG" Type="Self.CCMEMOLOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOLOG">
+        <PropertyRef Name="ASSIGNGROUP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOLOG_CCMEMOMASTER">
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="1" />
+    <End Role="CCMEMOLOG" Type="Self.CCMEMOLOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCMEMOMASTER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOLOG">
+        <PropertyRef Name="MEMOMASTERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOLOG_CCUSER">
+    <End Role="CCUSER" Type="Self.CCUSER" Multiplicity="0..1" />
+    <End Role="CCMEMOLOG" Type="Self.CCMEMOLOG" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCUSER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOLOG">
+        <PropertyRef Name="ACTEDBY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCCALLCATAGORY">
+    <End Role="CCCALLCATAGORY" Type="Self.CCCALLCATAGORY" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCCALLCATAGORY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="CALLCATEGORY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCCALLTYPE">
+    <End Role="CCCALLTYPE" Type="Self.CCCALLTYPE" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCCALLTYPE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="CALLTYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCENUMACTION">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="0..1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="LASTACTIONTYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCENUMMTYPE">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="MEMOTYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCENUMPRIORITY">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="PRIORITY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCENUMPRODUCT">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="PRODUCTTYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCENUMSOURCE">
+    <End Role="CCENUMERATION" Type="Self.CCENUMERATION" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCENUMERATION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="SOURCETYPE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCGROUP">
+    <End Role="CCGROUP" Type="Self.CCGROUP" Multiplicity="0..1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="ASSIGNGROUP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMEMOMASTER_CCUSERCREATED">
+    <End Role="CCUSER" Type="Self.CCUSER" Multiplicity="1" />
+    <End Role="CCMEMOMASTER" Type="Self.CCMEMOMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCUSER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMEMOMASTER">
+        <PropertyRef Name="CREATEDBY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCMENU_CCMENU">
+    <End Role="CCMENU" Type="Self.CCMENU" Multiplicity="0..1" />
+    <End Role="CCMENU1" Type="Self.CCMENU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCMENU">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCMENU1">
+        <PropertyRef Name="PARENTID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCROLEMENU_CCMENU">
+    <End Role="CCMENU" Type="Self.CCMENU" Multiplicity="1" />
+    <End Role="CCROLEMENU" Type="Self.CCROLEMENU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCMENU">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCROLEMENU">
+        <PropertyRef Name="MENUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCROLEMENU_CCROLE">
+    <End Role="CCROLE" Type="Self.CCROLE" Multiplicity="1" />
+    <End Role="CCROLEMENU" Type="Self.CCROLEMENU" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCROLEMENU">
+        <PropertyRef Name="ROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCUSER_CCGROUP">
+    <End Role="CCGROUP" Type="Self.CCGROUP" Multiplicity="0..1" />
+    <End Role="CCUSER" Type="Self.CCUSER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCGROUP">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCUSER">
+        <PropertyRef Name="GROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CCUSER_CCROLE">
+    <End Role="CCROLE" Type="Self.CCROLE" Multiplicity="1" />
+    <End Role="CCUSER" Type="Self.CCUSER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CCROLE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CCUSER">
+        <PropertyRef Name="EMPLOYEEROLEID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OBLCONTACTCENTERModelStoreContainer">
+    <EntitySet Name="CCACTIONGROUPMAP" EntityType="Self.CCACTIONGROUPMAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCACTIONMAP" EntityType="Self.CCACTIONMAP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCCALLCATAGORY" EntityType="Self.CCCALLCATAGORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCCALLTYPE" EntityType="Self.CCCALLTYPE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCENUMERATION" EntityType="Self.CCENUMERATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCEVENTLOG" EntityType="Self.CCEVENTLOG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCGROUP" EntityType="Self.CCGROUP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCMEMOATTACHMENT" EntityType="Self.CCMEMOATTACHMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCMEMOLOG" EntityType="Self.CCMEMOLOG" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCMEMOMASTER" EntityType="Self.CCMEMOMASTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCMENU" EntityType="Self.CCMENU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCROLE" EntityType="Self.CCROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCROLEMENU" EntityType="Self.CCROLEMENU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CCUSER" EntityType="Self.CCUSER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TblAudit" EntityType="Self.TblAudit" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[TblAudit].[AuditID] AS [AuditID], 
+[TblAudit].[Type] AS [Type], 
+[TblAudit].[TableName] AS [TableName], 
+[TblAudit].[PrimaryKeyField] AS [PrimaryKeyField], 
+[TblAudit].[PrimaryKeyValue] AS [PrimaryKeyValue], 
+[TblAudit].[FieldName] AS [FieldName], 
+[TblAudit].[OldValue] AS [OldValue], 
+[TblAudit].[NewValue] AS [NewValue], 
+[TblAudit].[UpdateDate] AS [UpdateDate], 
+[TblAudit].[UserName] AS [UserName]
+FROM [dbo].[TblAudit] AS [TblAudit]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CCACTIONGROUPMAP_CCACTIONENUMERATION" Association="Self.FK_CCACTIONGROUPMAP_CCACTIONENUMERATION">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCACTIONGROUPMAP" EntitySet="CCACTIONGROUPMAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCACTIONGROUPMAP_CCGROUP" Association="Self.FK_CCACTIONGROUPMAP_CCGROUP">
+      <End Role="CCGROUP" EntitySet="CCGROUP" />
+      <End Role="CCACTIONGROUPMAP" EntitySet="CCACTIONGROUPMAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCACTIONGROUPMAP_CCROLE" Association="Self.FK_CCACTIONGROUPMAP_CCROLE">
+      <End Role="CCROLE" EntitySet="CCROLE" />
+      <End Role="CCACTIONGROUPMAP" EntitySet="CCACTIONGROUPMAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCACTIONMAP_CCACTIONENUMERATION" Association="Self.FK_CCACTIONMAP_CCACTIONENUMERATION">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCACTIONMAP" EntitySet="CCACTIONMAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCACTIONMAP_CCROLE" Association="Self.FK_CCACTIONMAP_CCROLE">
+      <End Role="CCROLE" EntitySet="CCROLE" />
+      <End Role="CCACTIONMAP" EntitySet="CCACTIONMAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCCALLTYPE_CCCALLCATAGORY" Association="Self.FK_CCCALLTYPE_CCCALLCATAGORY">
+      <End Role="CCCALLCATAGORY" EntitySet="CCCALLCATAGORY" />
+      <End Role="CCCALLTYPE" EntitySet="CCCALLTYPE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOATTACHMENT_CCMEMOMASTER" Association="Self.FK_CCMEMOATTACHMENT_CCMEMOMASTER">
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+      <End Role="CCMEMOATTACHMENT" EntitySet="CCMEMOATTACHMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOATTACHMENT_CCUSER" Association="Self.FK_CCMEMOATTACHMENT_CCUSER">
+      <End Role="CCUSER" EntitySet="CCUSER" />
+      <End Role="CCMEMOATTACHMENT" EntitySet="CCMEMOATTACHMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOLOG_CCENUMERATION" Association="Self.FK_CCMEMOLOG_CCENUMERATION">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOLOG" EntitySet="CCMEMOLOG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOLOG_CCMEMOLOG" Association="Self.FK_CCMEMOLOG_CCMEMOLOG">
+      <End Role="CCGROUP" EntitySet="CCGROUP" />
+      <End Role="CCMEMOLOG" EntitySet="CCMEMOLOG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOLOG_CCMEMOMASTER" Association="Self.FK_CCMEMOLOG_CCMEMOMASTER">
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+      <End Role="CCMEMOLOG" EntitySet="CCMEMOLOG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOLOG_CCUSER" Association="Self.FK_CCMEMOLOG_CCUSER">
+      <End Role="CCUSER" EntitySet="CCUSER" />
+      <End Role="CCMEMOLOG" EntitySet="CCMEMOLOG" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCCALLCATAGORY" Association="Self.FK_CCMEMOMASTER_CCCALLCATAGORY">
+      <End Role="CCCALLCATAGORY" EntitySet="CCCALLCATAGORY" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCCALLTYPE" Association="Self.FK_CCMEMOMASTER_CCCALLTYPE">
+      <End Role="CCCALLTYPE" EntitySet="CCCALLTYPE" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCENUMACTION" Association="Self.FK_CCMEMOMASTER_CCENUMACTION">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCENUMMTYPE" Association="Self.FK_CCMEMOMASTER_CCENUMMTYPE">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCENUMPRIORITY" Association="Self.FK_CCMEMOMASTER_CCENUMPRIORITY">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCENUMPRODUCT" Association="Self.FK_CCMEMOMASTER_CCENUMPRODUCT">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCENUMSOURCE" Association="Self.FK_CCMEMOMASTER_CCENUMSOURCE">
+      <End Role="CCENUMERATION" EntitySet="CCENUMERATION" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCGROUP" Association="Self.FK_CCMEMOMASTER_CCGROUP">
+      <End Role="CCGROUP" EntitySet="CCGROUP" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMEMOMASTER_CCUSERCREATED" Association="Self.FK_CCMEMOMASTER_CCUSERCREATED">
+      <End Role="CCUSER" EntitySet="CCUSER" />
+      <End Role="CCMEMOMASTER" EntitySet="CCMEMOMASTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCMENU_CCMENU" Association="Self.FK_CCMENU_CCMENU">
+      <End Role="CCMENU" EntitySet="CCMENU" />
+      <End Role="CCMENU1" EntitySet="CCMENU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCROLEMENU_CCMENU" Association="Self.FK_CCROLEMENU_CCMENU">
+      <End Role="CCMENU" EntitySet="CCMENU" />
+      <End Role="CCROLEMENU" EntitySet="CCROLEMENU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCROLEMENU_CCROLE" Association="Self.FK_CCROLEMENU_CCROLE">
+      <End Role="CCROLE" EntitySet="CCROLE" />
+      <End Role="CCROLEMENU" EntitySet="CCROLEMENU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCUSER_CCGROUP" Association="Self.FK_CCUSER_CCGROUP">
+      <End Role="CCGROUP" EntitySet="CCGROUP" />
+      <End Role="CCUSER" EntitySet="CCUSER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CCUSER_CCROLE" Association="Self.FK_CCUSER_CCROLE">
+      <End Role="CCROLE" EntitySet="CCROLE" />
+      <End Role="CCUSER" EntitySet="CCUSER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

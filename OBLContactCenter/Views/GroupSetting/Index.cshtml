@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Group Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Group Information
+            </div>
+            <div class="tools">
+                <button class="btn green" id="createGroup" data-url="@Url.Action("CreateGroup", "GroupSetting")"> Create <i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="portlet-body form">
+
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong> @TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong> @TempData["ErrorMsg"].ToString()
+                </div>
+            }
+
+
+
+            <div id="gridList">
+                @Html.Partial("_GroupListPartial")
+            </div>
+            <div id="userInfo">
+
+            </div>
+            <!-- END FORM-->
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-modal-lg" id="GroupInfo" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

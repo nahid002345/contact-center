@@ -1,0 +1,349 @@
+﻿@model OBLContactCenter.Models.TaskList
+@{
+    ViewBag.Title = "CRM Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+
+    var startDate;
+    var endDate;
+
+    $(document).ready(function () {
+        $("#srchCatagoryId").change(function () {
+            $("#srchTypeId").empty();
+            var selectedValue = $("#srchCatagoryId").val();
+            if (selectedValue != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCallType", "CRM")',
+                    dataType: 'json',
+                    data: { id: selectedValue },
+                    success: function (states) {
+                        $("#srchTypeId").append('<option value="">All</option>');
+                        $.each(states, function (i, state) {
+                            $("#srchTypeId").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        $("#srchTypeId").append('<option value="">All</option>');
+                        alert('Failed to retrieve Call Type.' + ex);
+                    }
+                });
+            }
+            else {
+                $("#srchTypeId").append('<option value="">All</option>');
+            }
+        });
+
+        $('#srchDateRange').daterangepicker({
+            format: 'DD/MM/YYYY',
+            separator: ' to ',
+            opens: "left",
+            startDate: moment().subtract('days', 29).format('DD/MM/YYYY'),
+            endDate: moment(),
+            minDate: '01/01/2012',
+        },
+            function (start, end) {
+                startDate = start;
+                endDate = end;
+                $('#srchDateRange input').val(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+        //$('#srchDateRange input').val(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+        $('#ModDetailInfo').on('hidden.bs.modal', function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("CloseModalTaskEnd", "CRMTask")',
+                data: {},
+                success: function (states) {
+                },
+                error: function (ex) {
+                    alert(ex);
+                }
+            });
+        });
+
+        $('#taskSearch').click(function () {
+            var actionurl = '@Url.Action("SearchList", "CRMTask")'; // the url to the controller
+            var ticktNo = $('#srchTicketNo').val();
+            var acCard = $('#srchacCardNo').val();
+            var custName = $('#srchCustName').val();
+            var contactNo = $('#srchContact').val();
+            var catagoryId = $('#srchCatagoryId').val();
+            var typeId = $('#srchTypeId').val();
+            var groupId = $('#srchGroupId').val();
+            var actionId = $('#srchActionId').val();
+            var statusId = "";
+            var fromDate = ((startDate === undefined || startDate == null || startDate.length <= 0) ? '' : startDate.format('DD/MM/YYYY'));
+            var toDate = ((endDate === undefined || endDate == null || endDate.length <= 0) ? '' : endDate.format('DD/MM/YYYY'));
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionurl,
+                data: { "ticktNo": ticktNo, "acCard": acCard, "catagoryId": catagoryId, "groupId": groupId, "actionId": actionId, "statusId": statusId, "from": fromDate, "to": toDate, "custName": custName, "contact": contactNo, "callTypeId": typeId },
+                success: function (data) {
+                    $('#gridList_all').html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to load Information');
+                }
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", ".viewCreateCRM", function () {
+
+            var actionurl = '@Url.Action("ViewRequest", "CRM")'; // the url to the controller
+
+            var id = $(this).attr('data-id'); // the id that's given to each button in the list
+            //alert(url2 + '/' + id);
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: actionurl,
+                data: { "requestId": id },
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $('#ModDetailInfo').modal('show');
+                    //$('#DetailInfo').html(data);
+                    //$('.nav-tabs a[href="#tab_detail"]').tab('show');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Failed to load Information');
+                }
+            });
+        });
+
+        $(document).on("click", ".editTaskCRM", function () {
+            //e.preventDefault();
+            var url = '@Url.Action("EditTaskMemo", "CRMTask")'; // the url to the controller
+            var id = $(this).attr('data-id');
+            $.get(url + '/' + id, function (data) {
+                $('.modal-body').html(data);
+                $('#ModDetailInfo').modal('show');
+                $.validator.unobtrusive.parse($('.modal-body'));
+            });
+        });
+    });
+
+</script>
+
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>CRM Task Information
+            </div>
+        </div>
+        <div class="portlet-body form">
+
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong> @TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong> @TempData["ErrorMsg"].ToString()
+                </div>
+            }
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_list" data-toggle="tab"><i class="icon-list"></i>Task List </a>
+                    </li>
+                    @*<li>
+                        <a href="#tab_detail" data-toggle="tab"><i class="icon-book-open"></i> Detail</span></a>
+                    </li>*@
+                    @foreach (string tabActionName in Model.CCMEMOLIST.Select(x => x.CCENUMERATION.NAME).Distinct().ToList())
+                    {
+                        <li>
+                            <a href="#tab_@tabActionName.ToLower().Replace(" ","")" data-toggle="tab"> @tabActionName <span class="badge badge-success">@Model.CCMEMOLIST.Where(t => t.CCENUMERATION.NAME.ToLower().Contains(@tabActionName.ToLower().Trim())).Count()</span></a>
+                        </li>
+                    }
+                    @*<li>
+                            <a href="#tab_open" data-toggle="tab"><i class="icon-book-open"></i> Open<span class="badge badge-success">@Model.CCMEMOLIST.Where(t => t.CCENUMERATION.NAME.ToLower().Contains("open")).Count()</span></a>
+                        </li>*@
+                </ul>
+                <div class="tab-content no-space">
+                    <div class="tab-pane active" id="tab_list">
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+
+                                    <i class="fa fa-search"></i>Search Panel
+
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse" data-original-title="" title="">
+                                    </a>
+                                </div>
+                                <div class="actions col-md-4">
+                                    <div class="input-group" id="srchDateRange">
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-btn">
+                                            <button class="btn default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <label class="control-label">Ticket No.</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Ac/Card No.</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Cust. Name</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Contact</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Group</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Catagory</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Call Type</label>
+                                            </td>
+                                            <td>
+                                                <label class="control-label">Action</label>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td>
+                                            @Html.TextBox("srchTicketNo", null, new { @class = "form-control", id = "srchTicketNo" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("srchacCardNo", null, new { @class = "form-control", id = "srchacCardNo" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("srchCustName", null, new { @class = "form-control", id = "srchCustName" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("srchContact", null, new { @class = "form-control", id = "srchContact" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("srchGroupId", (IEnumerable<SelectListItem>)ViewBag.AssignGroupList, "All", new { @class = "form-control", id = "srchGroupId" })
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("srchCatagoryId", (IEnumerable<SelectListItem>)ViewBag.CallCatagoryList, "All", new { @class = "form-control", id = "srchCatagoryId" })
+
+                                        </td>
+                                        <td>
+                                            @{
+//                                                var selectEmptyList = new SelectList(new SelectListItem { Text = "All", Value = "", Selected = true }, "Value", "Text");
+                                            }
+                                            @Html.DropDownList("srchTypeId", new SelectList(string.Empty, "Value", "Text"), "All", new { @class = "form-control", id = "srchTypeId" })
+
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("srchActionId", (IEnumerable<SelectListItem>)ViewBag.ActionList, "All", new { @class = "form-control", id = "srchActionId" })
+                                        </td>
+                                        <td>
+                                            <button class="btn green" id="taskSearch">Search <i class="fa fa-search"></i></button>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                @{
+                                    Model.TASKTYPENAME = "all";
+                                }
+                                @Html.Partial("_taskListPartial", Model)
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    @*<div class="tab-pane" id="tab_detail">
+                        <div id="DetailInfo" style="padding: 2%;">
+
+                        </div>
+                    </div>*@
+                    @foreach (string tabActionName in Model.CCMEMOLIST.Select(x => x.CCENUMERATION.NAME.Trim()).Distinct().ToList())
+                    {
+                        <div class="tab-pane" id="tab_@tabActionName.ToLower().Replace(" ","")">
+                            <div class="portlet box red-intense">
+                                <div class="portlet-title">
+                                    <div class="caption">
+
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse" data-original-title="" title="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    @{
+                        Model.CATEGORIGEDMEMOLIST = Model.CCMEMOLIST;
+                        Model.CCMEMOLIST = Model.CCMEMOLIST.Where(t => t.CCENUMERATION.NAME.ToLower().Contains(@tabActionName.ToLower().Trim())).ToList();
+                        Model.TASKTYPENAME = tabActionName.ToLower().Replace(" ", "");
+
+                                    }
+                                    @Html.Partial("_taskListPartial", Model)
+                                    @{
+                        Model.CCMEMOLIST = Model.CATEGORIGEDMEMOLIST;
+                        Model.CATEGORIGEDMEMOLIST = null;
+                                    }
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+            <!-- END FORM-->
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-modal-lg" id="ModDetailInfo" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-full">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

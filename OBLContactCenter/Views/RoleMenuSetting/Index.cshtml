@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Role wise Menu Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", "#btnSearch", function () {
+            $("#detailInfo").empty();
+            var selectedValue = $("#ddlRoleMenu").val();
+            var selectedMenu = $("#ddlMenu").val();
+            if (selectedValue != '') {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetRoleWiseMenuList", "RoleMenuSetting")',
+                    dataType: 'html',
+                    data: { id: selectedValue,MenuId: selectedMenu },
+                    success: function (data) {
+                        $('#detailInfo').html(data);
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Role wise Menu Information
+            </div>
+        </div>
+        <div class="portlet-body form">
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong>@TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong>@TempData["ErrorMsg"].ToString()
+                </div>
+            }
+            <div class="form-body">
+                <div class="panel panel-info">
+
+                    <div class="panel-body">
+                        <div class="row panel-info">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Role Name</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlRoleMenu", (IEnumerable<SelectListItem>)ViewBag.RoleList, "Select", new { @class = "form-control", id = "ddlRoleMenu" })
+                                </div>
+                                
+                                <label class="col-md-2 control-label">Menu Name</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("ddlMenu", (IEnumerable<SelectListItem>)ViewBag.MenuList, "Parent Menu", new { @class = "form-control", id = "ddlMenu" })
+                                </div>
+                                <button type="submit" class="btn green" name="btnName" id="btnSearch"><span class="fa fa-search"></span>Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div id="detailInfo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

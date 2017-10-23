@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Action wise Assign Group Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlMemoType").change(function () {
+            $("#detailInfo").empty();
+            $("#ddlAction").empty();
+            var MemoTypeValue = $("#ddlMemoType").val();
+            var RoleIdValue = $("#ddlRole").val();
+            if (MemoTypeValue != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMemoTypeWiseAction", "ActionAsgGroupSetting")',
+                    dataType: 'json',
+                    data: { MTypeId: MemoTypeValue, RoleId: RoleIdValue },
+                    success: function (states) {
+                        $("#ddlAction").append('<option value="">Select</option>');
+                        $.each(states, function (i, state) {
+                            $("#ddlAction").append('<option value="' + state.Value + '">' +
+                                 state.Text + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        $("#ddlAction").append('<option value="">All</option>');
+                        alert('Failed to retrieve Call Type.' + ex);
+                    }
+                });
+            }
+            else {
+                $("#ddlAction").append('<option value="">Select</option>');
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            $("#detailInfo").empty();
+            var roleVal = $("#ddlRole").val();
+            var actionVal = $("#ddlAction").val();
+            var mTypeVal = $("#ddlMemoType").val();
+            if (roleVal != '' && actionVal != '' && mTypeVal != '') {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetRoleMTypeActionWiseGroupList", "ActionAsgGroupSetting")',
+                    dataType: 'html',
+                    data: { RoleId: roleVal, MTypeId: mTypeVal, ActionId: actionVal },
+                    success: function (data) {
+                        $('#detailInfo').html(data);
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Action wise Assign Group Information
+            </div>
+        </div>
+        <div class="portlet-body form">
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong>@TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong>@TempData["ErrorMsg"].ToString()
+                </div>
+            }
+            <div class="form-body">
+                <div class="panel panel-info">
+
+                    <div class="panel-body">
+                        <div class="row panel-info">
+                            <div class="form-group">
+                                <label class="col-md-1 control-label">Role</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownList("ddlRole", (IEnumerable<SelectListItem>)ViewBag.RoleList, "Select", new { @class = "form-control", id = "ddlRole" })
+                                </div>
+                                <label class="col-md-2 control-label">Memo Type</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownList("ddlMemoType", (IEnumerable<SelectListItem>)ViewBag.MemoTypeList, "Select", new { @class = "form-control", id = "ddlMemoType" })
+                                </div>
+                                <label class="col-md-1 control-label">Action</label>
+                                <div class="col-md-2">
+                                    @Html.DropDownList("ddlAction", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "form-control", id = "ddlAction" })
+                                </div>
+
+                                <button type="submit" class="btn green" name="btnName" id="btnSearch"><span class="fa fa-search"></span>Search</button>
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div id="detailInfo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

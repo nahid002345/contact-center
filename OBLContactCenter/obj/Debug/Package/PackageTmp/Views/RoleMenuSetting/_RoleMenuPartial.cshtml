@@ -1,0 +1,47 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlRoleMenu").change(function () {
+            $("#detailInfo").empty();
+            var selectedValue = $("#ddlRoleMenu").val();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetRoleWiseMenuList", "RoleMenuSetting")',
+                dataType: 'json',
+                data: { id: selectedValue },
+                success: function (data) {
+                    $('#detailInfo').html(data);
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve data.' + ex);
+                }
+            });
+        });
+    });
+
+</script>
+<div class="col-md-12 ">
+    <div class="portlet box blue-ebonyclay">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-grid"></i>Role wise Menu Information
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Role Name</label>
+                    <div class="col-md-4">
+                        @Html.DropDownList("ddlRoleMenu",(IEnumerable<SelectListItem>)ViewBag.RoleList, "Select", new { @class = "form-control", id = "ddlRoleMenu" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn green" name="btnName" value="create" id="SrchRMenuBtn">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

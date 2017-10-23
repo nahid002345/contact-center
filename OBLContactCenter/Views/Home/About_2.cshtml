@@ -1,0 +1,281 @@
+﻿@model CCMEMOMASTER
+
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal form-row-seperated" action="#">
+            <div class="portlet">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-shopping-cart"></i>CRM Form
+                    </div>
+                    <div class="actions btn-set">
+                        <button class="btn green"><i class="fa fa-check"></i>Save</button>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="note note-info">
+                        <div class="col-sm-3">
+                            <span class="fa  fa-ticket"></span>Ticket No : <b>@Model.TICKETNO</b>
+                        </div>
+                        Memo Status:
+                        <span class="label label-info"><b>@Model.ISOPEN</b></span>
+                        Priority Status:
+                        <span class="label label-warning"><b>@Model.PRIORITY</b></span>
+                    </div>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_info" data-toggle="tab">Information </a>
+                            </li>
+                            <li>
+                                <a href="#tab_attach" data-toggle="tab">Attachment <span class="badge badge-success">3 </span></a>
+                            </li>
+                            <li>
+                                <a href="#tab_history" data-toggle="tab">History </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content no-space">
+                            <div class="tab-pane active" id="tab_info">
+                                <div class="form-body">
+                                    <div class="panel panel-info">
+                                        <div class="panel-body" style="padding: 5px;">
+                                            <h4 class="form-section">Memo Info</h4>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Memo Type</label>
+                                                <div class="col-md-2">
+                                                    @Html.DropDownListFor(m => m.MEMOTYPE, (IEnumerable<SelectListItem>)ViewBag.GroupList, "Select Group", new { @class = "form-control" })
+                                                    
+                                                    @*<select class="form-control">
+                                                        <option value="">Inbound Call</option>
+                                                        <option value="">Outbound Call</option>
+                                                    </select>*@
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-1 control-label">Priority</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Low</option>
+                                                        <option value="">Medium</option>
+                                                        <option value="">High</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-1 control-label">Status</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Open</option>
+                                                        <option value="">Close</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" style="padding: 5px;">
+                                            <h4 class="form-section">Customer Info</h4>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Customer Name</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input-sm" placeholder="Enter Customer Name">
+                                                </div>
+                                                <label class="col-md-2 control-label">Contact No</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input-sm" placeholder="Enter Customer Contact No">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">A/C No</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input-sm" placeholder="Enter Account No">
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-2 control-label">Card No</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control input-sm" placeholder="Enter Employee ID/ User ID">
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Request Details</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control col-md-6" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" style="padding: 5px;">
+                                            <h4 class="form-section">Details</h4>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Call Catagory</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Catagory 1</option>
+                                                        <option value="">Catagory 2</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-2 control-label">Call Types</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Call Type 1</option>
+                                                        <option value="">Call Type 2</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Source Type</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Source 1</option>
+                                                        <option value="">Source 2</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-2 control-label">Product Type</label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Product 1</option>
+                                                        <option value="">Product 2</option>
+                                                        <option value="">Product 3</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Action </label>
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">Apply</option>
+                                                        <option value="">Refer</option>
+                                                        <option value="">Resolve</option>
+                                                    </select>
+                                                    @*<div class="alert alert-warning alert-dismissable">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                                            <strong>Warning!</strong> Something went wrong. Please check.
+                                                        </div>*@
+                                                </div>
+                                                <label class="col-md-2 control-label">Action Details</label>
+                                                <div class="col-md-5">
+                                                    <textarea class="form-control col-md-6" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_history">
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-cogs"></i>Action History
+                                        </div>
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body" style="display: block;">
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            #
+                                                        </th>
+                                                        <th>
+                                                            Assign Group
+                                                        </th>
+                                                        <th>
+                                                            Action Taken
+                                                        </th>
+                                                        <th>
+                                                            Taken By
+                                                        </th>
+                                                        <th>
+                                                            Date
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            1
+                                                        </td>
+                                                        <td>
+                                                            Mark
+                                                        </td>
+                                                        <td>
+                                                            Otto
+                                                        </td>
+                                                        <td>
+                                                            makr124
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-success">
+                                                                Approved
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            2
+                                                        </td>
+                                                        <td>
+                                                            Jacob
+                                                        </td>
+                                                        <td>
+                                                            Nilson
+                                                        </td>
+                                                        <td>
+                                                            jac123
+                                                        </td>
+                                                        <td>
+                                                            <span class="label label-sm label-info">
+                                                                Pending
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

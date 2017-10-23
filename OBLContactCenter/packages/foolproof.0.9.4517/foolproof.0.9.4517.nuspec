@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>foolproof</id>
+    <version>0.9.4517</version>
+    <title>MVC Foolproof Validation</title>
+    <authors>Nick Riggs</authors>
+    <owners>Nick Riggs</owners>
+    <licenseUrl>http://foolproof.codeplex.com/license</licenseUrl>
+    <projectUrl>http://foolproof.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVC Foolproof Validation aims to extend the Data Annotation validation provided in ASP.NET MVC. Includes such annotations as [GreaterThan], [RequredIfTrue], [RequiredIfRegExMatch] and more. It also provides simply method for creating custom contingent validators.</description>
+  </metadata>
+</package>
